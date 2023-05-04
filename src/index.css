@@ -6,6 +6,16 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* complementary color palette */
+  --ocean-green: #49B265;
+  --salem: #159947;
+  --eden: #1F5F5B;
+  --cyprus: #06373A;
+  --dark-green: #062315;
+
+  /* components colors */
+  --main-color: var(--salem);
 }
 
 a {
