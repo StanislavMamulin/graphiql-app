@@ -1,0 +1,19 @@
+.login_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.login_form input,.login_form button[type="submit"] {
+    margin: 5px 5px;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid #000000;
+}
+.login_form button[type="submit"]{
+    cursor: pointer;
+}
+
+
