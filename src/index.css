@@ -16,6 +16,10 @@
 
   /* components colors */
   --main-color: var(--salem);
+
+  --action-button-color: var(--ocean-green);
+  --action-button-hover: var(--salem);
+  --action-button-pressed: #0c7032;
 }
 
 a {
