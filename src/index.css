@@ -13,9 +13,13 @@
   --eden: #1F5F5B;
   --cyprus: #06373A;
   --dark-green: #062315;
+  --lightest-green: #F2FAF4;
+  --middle-green: #95D4A6;
 
   /* components colors */
   --main-color: var(--salem);
+  --lightest-main-color: var(--lightest-green);
+  --middle-main-color: var(--middle-green);
 
   --action-button-color: var(--ocean-green);
   --action-button-hover: var(--salem);
