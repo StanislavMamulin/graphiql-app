@@ -1,0 +1,45 @@
+.lang__container {
+  margin: 11px;
+  align-self: flex-start;
+  width: 100px;
+
+  transition: margin var(--animation-duration);
+}
+
+.lang__container_small {
+  margin-top: 3px;
+}
+
+.lang__button {
+  border: 1px solid var(--main-color);
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.lang__button:hover {
+  background-color: var(--lightest-main-color);
+}
+
+.lang__button:active {
+  background-color: var(--middle-main-color);
+}
+
+.lang__item {
+  list-style: none;
+}
+
+.lang__flag {
+  object-fit: contain;
+}
+
+.lang__list {
+  padding: 8px;
+  margin: 0;
+  margin-top: 8px;
+
+  background-color: whitesmoke;
+  border: 1px gray solid;
+  border-radius: 5px;
+
+  box-shadow: 2px 2px 5px gray;
+}
