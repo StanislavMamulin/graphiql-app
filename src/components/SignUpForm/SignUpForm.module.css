@@ -7,11 +7,11 @@
 }
 
 .signup_form input, .signup_form button[type="submit"] {
-    margin: 5px 5px;
-    padding: 7px 8px;
-    font-size: 14px;
+    margin: .5em .3em 0;
+    padding: .5em;
+    width: 17em;
     color: inherit;
-    border: 1px solid #000000;
+    border: .063em solid #000000;
 }
 
 .signup_form .hasError input {
@@ -22,6 +22,7 @@
     color: red;
     text-align: center;
     height: 1.3em;
+    font-size: .8em;
 }
 
 .signup_form button[type="submit"] {
@@ -29,7 +30,7 @@
     cursor: pointer;
 }
 
-.form_group {
+.signup_form .form_group {
     display: flex;
     flex-direction: column;
 }

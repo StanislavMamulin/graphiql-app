@@ -8,11 +8,11 @@
 
 
 .login_form input, .login_form button[type="submit"] {
-    margin: 5px 5px;
-    padding: 7px 8px;
-    font-size: 14px;
+    margin: .5em .3em 0;
+    padding: .5em;
+    width: 17em;
     color: inherit;
-    border: 1px solid #000000;
+    border: .063em solid #000000;
 }
 
 .login_form .hasError input {
@@ -23,6 +23,7 @@
     color: red;
     text-align: center;
     height: 1.3em;
+    font-size: .8em;
 }
 
 .login_form button[type="submit"] {
