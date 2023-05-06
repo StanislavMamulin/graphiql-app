@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { Button } from "../../components/Button/Button";
-import styles from "./Header.module.css";
+import { useEffect, useState } from 'react';
+import { Button } from '../../components/Button/Button';
+import styles from './Header.module.css';
+import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
 
 const STICKY_THRESHOLD_PX = 100;
 
@@ -18,19 +19,19 @@ export function Header() {
       }
     };
 
-    window.addEventListener("scroll", isSticky);
+    window.addEventListener('scroll', isSticky);
     return () => {
-      window.removeEventListener("scroll", isSticky);
+      window.removeEventListener('scroll', isSticky);
     };
   }, [sticky]);
 
   const getHeaderClass = () =>
-    styles.header__container +
-    (sticky ? " " + styles.header__container_sticky : "");
+    styles.header__container + (sticky ? ' ' + styles.header__container_sticky : '');
 
   return (
     <header className={getHeaderClass()}>
-      <Button title="Sign out" clickHandler={() => console.log("clicked")} />
+      <LangSwitcher />
+      <Button title="Sign out" clickHandler={() => console.log('clicked')} />
     </header>
   );
 }
