@@ -1,0 +1,16 @@
+{
+    "welcome": "WELCOME TO",
+    "auth": {
+        "register": "Register",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "signout": "Sign Out",
+        "account": "Already have an account?",
+        "email": "Email",
+        "password": "Password",
+        "passValid": "minimum 8 symbols, at least one letter, one digit, one special character"
+    },
+    "apiError": {
+
+    }
+}
