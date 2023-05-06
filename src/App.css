@@ -13,10 +13,6 @@
   scrollbar-width: thin;
 }
 
-.app {
-  margin-top: var(--header-height);
-}
-
 input:focus,
 textarea:focus,
 select:focus {

@@ -1,11 +1,4 @@
-import "sanitize.css";
-import { Header } from "./components/Header/Header";
-import "./App.css";
+import 'sanitize.css';
+import './App.css';
 
-export function App() {
-  return (
-    <main className="app">
-      <Header />
-    </main>
-  );
-}
+export function App() {}
