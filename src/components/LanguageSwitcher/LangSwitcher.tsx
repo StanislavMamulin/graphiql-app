@@ -5,7 +5,11 @@ import { LangItem, languageOptions } from './languageOptions';
 
 const defaultLangFlag = <FlagImg src={languageOptions[0].flagimg} alt={languageOptions[0].name} />;
 
-export const LangSwitcher = () => {
+type LangSwitcherProps = {
+  small?: boolean;
+};
+
+export const LangSwitcher = ({ small }: LangSwitcherProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [langFlag, setLangFlag] = useState(defaultLangFlag);
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -35,8 +39,11 @@ export const LangSwitcher = () => {
     window.removeEventListener('click', clickHandler);
   };
 
+  const getLangContainerStyle = () =>
+    styles.lang__container + (small ? ' ' + styles.lang__container_small : '');
+
   return (
-    <div className={styles.lang__container}>
+    <div className={getLangContainerStyle()}>
       <button onClick={showDropdownHandler} className={styles.lang__button}>
         {langFlag}
       </button>

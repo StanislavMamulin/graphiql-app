@@ -1,5 +1,4 @@
 .header__container {
-  --animation-duration: 0.2s;
   background-color: #EEEFDE;
   height: var(--header-height);
 

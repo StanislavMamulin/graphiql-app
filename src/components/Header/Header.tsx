@@ -30,7 +30,7 @@ export function Header() {
 
   return (
     <header className={getHeaderClass()}>
-      <LangSwitcher />
+      <LangSwitcher small={sticky} />
       <Button title="Sign out" clickHandler={() => console.log('clicked')} />
     </header>
   );

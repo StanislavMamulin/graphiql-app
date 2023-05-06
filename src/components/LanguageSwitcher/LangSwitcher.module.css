@@ -2,6 +2,12 @@
   margin: 11px;
   align-self: flex-start;
   width: 100px;
+
+  transition: margin var(--animation-duration);
+}
+
+.lang__container_small {
+  margin-top: 3px;
 }
 
 .lang__button {
