@@ -1,0 +1,48 @@
+.login_form {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: .5em
+}
+
+.login_form input {
+    margin: .5em 0 0;
+    height: 3em;
+    padding: .5em;
+    color: inherit;
+    border: .063em solid #000000;
+    font-size: 1em;
+}
+
+.login_form .hasError input {
+    border-color: red;
+}
+
+.login_form [role="alert"] {
+    color: red;
+    text-align: center;
+    height: 1.3em;
+    line-height: 1.1em;
+    font-size: .8em;
+}
+
+.login_form button {
+    cursor: pointer;
+}
+
+.login_form .form_group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.login_form .form_group:last-child {
+    margin: .5em 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
