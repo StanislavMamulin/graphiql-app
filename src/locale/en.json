@@ -1,5 +1,10 @@
 {
     "welcome": "WELCOME TO",
+    "404": {
+        "mess1": "Page not found",
+        "mess2": "Sorry, we couldn’t find the page you’re looking for.",
+        "route": "Go back home"
+    },
     "auth": {
         "register": "Register",
         "signin": "Sign in",
