@@ -1,17 +1,21 @@
 .signup_form {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: .5em;
 }
 
-.signup_form input, .signup_form button[type="submit"] {
-    margin: .5em .3em 0;
+.signup_form input{
+    margin: .5em 0 0;
+    height: 3em;
     padding: .5em;
-    width: 17em;
-    color: inherit;
+    border-radius: .31em;
     border: .063em solid #000000;
+    font-size: 1em;
 }
 
 .signup_form .hasError input {
@@ -21,16 +25,23 @@
 .signup_form [role="alert"] {
     color: red;
     text-align: center;
-    height: 1.3em;
+    height: 1em;
+    line-height: 1.1em;
     font-size: .8em;
 }
 
-.signup_form button[type="submit"] {
-    align-self: baseline;
+.signup_form button {
     cursor: pointer;
 }
 
 .signup_form .form_group {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+}
+.signup_form .form_group:last-child{
+    margin: .5em 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
 }

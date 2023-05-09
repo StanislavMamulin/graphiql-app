@@ -2,13 +2,14 @@ import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './LoginForm.module.css';
+import { Button } from '../Button/Button';
 
 interface validateFields {
   email: string;
   password: string;
 }
 
-const Form: FC = () => {
+const LoginForm: FC = () => {
   const {
     register,
     handleSubmit,
@@ -57,10 +58,12 @@ const Form: FC = () => {
         {<span role="alert">{errors.password?.message}</span>}
       </div>
       <div className={styles.form_group}>
-        <button type="submit">Login</button>
+        <Button title="Login" type="submit" />
+        or
+        <a href="">Register</a>
       </div>
     </form>
   );
 };
 
-export default Form;
+export default LoginForm;

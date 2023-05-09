@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './SignUpForm.module.css';
+import { Button } from '../Button/Button';
 
-const Form: FC = () => {
+const SignUpForm: FC = () => {
   const {
     register,
     handleSubmit,
@@ -81,10 +82,12 @@ const Form: FC = () => {
         {<span role="alert">{errors.cPassword?.message}</span>}
       </div>
       <div className={styles.form_group}>
-        <button type="submit">SignUp</button>
+        <Button title="SignUp" type="submit" />
+        or
+        <a href="">Login</a>
       </div>
     </form>
   );
 };
 
-export default Form;
+export default SignUpForm;
