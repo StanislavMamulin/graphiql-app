@@ -60,7 +60,7 @@ const LoginForm: FC = () => {
       <div className={styles.form_group}>
         <Button title="Login" type="submit" />
         or
-        <a href="">Register</a>
+        <a href="">sign Up</a>
       </div>
     </form>
   );
