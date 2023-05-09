@@ -6,9 +6,6 @@ const LoginPage: FC = () => {
     <div>
       <h1>Login</h1>
       <LoginForm />
-      <center>
-        Or <a href="/register">register</a>
-      </center>
     </div>
   );
 };

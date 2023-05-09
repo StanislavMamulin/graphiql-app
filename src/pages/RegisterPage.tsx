@@ -6,9 +6,6 @@ const RegisterPage: FC = () => {
     <div>
       <h1>Register</h1>
       <SignUpForm />
-      <center>
-        Already have an account? <a href="/login">Sign in</a>
-      </center>
     </div>
   );
 };
