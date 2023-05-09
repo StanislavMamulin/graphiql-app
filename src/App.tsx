@@ -16,14 +16,7 @@ export const App = () => {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route
-          path="/main"
-          element={
-            // <RequireAuth>
-            <MainPage />
-            // </RequireAuth>
-          }
-        />
+        <Route path="/main" element={<MainPage />} />
         <Route path="404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
