@@ -14,6 +14,7 @@
     height: 3em;
     padding: .5em;
     color: inherit;
+    border-radius: .31em;
     border: .063em solid #000000;
     font-size: 1em;
 }
