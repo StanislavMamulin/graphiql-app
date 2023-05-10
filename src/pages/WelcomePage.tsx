@@ -26,14 +26,19 @@ export const WelcomePage = () => {
       >
         <div className={styles.user_btns}>
           <LangSwitcher />
-          {!isAuth ? (
-            <div className={styles.user_btns_auth}>
-              <Button title="Sign in" clickHandler={() => console.log('clicked')} />
-              <Button title="Sign up" clickHandler={() => console.log('clicked')} />
-            </div>
-          ) : (
-            <Button title="Sign in" clickHandler={() => console.log('clicked')} />
-          )}
+          <div className={styles.user_btns_auth}>
+            {!isAuth ? (
+              <>
+                <Button title="Sign in" clickHandler={() => console.log('clicked')} />
+                <Button title="Sign up" clickHandler={() => console.log('clicked')} />
+              </>
+            ) : (
+              <>
+                <Button title="Go to Main Page" clickHandler={() => console.log('clicked')} />
+                <Button title="Sign out" clickHandler={() => console.log('clicked')} />
+              </>
+            )}
+          </div>
         </div>
         <div className="welcome_content">
           <div>
