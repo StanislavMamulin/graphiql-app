@@ -3,12 +3,20 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './SignUpForm.module.css';
 import { Button } from '../Button/Button';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { setUser } from '../../redux/slices/userSlice';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpForm: FC = () => {
+  const dispatch = useAppDispatch();
+  const history = useNavigate();
+
   const {
     register,
     handleSubmit,
     getValues,
+    setError,
     formState: { errors },
   } = useForm({
     mode: 'onSubmit',
@@ -16,9 +24,24 @@ const SignUpForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = () => {
+    const auth = getAuth();
     const { email, password } = getValues();
-    console.log(email);
-    console.log(password);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            id: user.uid,
+            email: user.email,
+            token: user.refreshToken,
+          })
+        );
+        history('/');
+      })
+      .catch((e) => {
+        setError('form', { type: 'form', message: e.message });
+      });
   };
 
   const passwordValidation = () => {
@@ -36,6 +59,7 @@ const SignUpForm: FC = () => {
 
   return (
     <form className={styles.signup_form} onSubmit={handleSubmit(onSubmit)}>
+      {<span role="alert">{errors.form?.message}</span>}
       <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
         <input
           {...register('email', {
@@ -84,7 +108,7 @@ const SignUpForm: FC = () => {
       <div className={styles.form_group}>
         <Button title="SignUp" type="submit" />
         or
-        <a href="">sign in</a>
+        <Link to="/login">sign in</Link>
       </div>
     </form>
   );
