@@ -1,8 +1,12 @@
 import { FC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './LoginForm.module.css';
 import { Button } from '../Button/Button';
+import { setUser } from '../../redux/slices/userSlice';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 
 interface validateFields {
   email: string;
@@ -10,22 +14,44 @@ interface validateFields {
 }
 
 const LoginForm: FC = () => {
+  const dispatch = useAppDispatch();
+  const history = useNavigate();
+
   const {
     register,
     handleSubmit,
+    getValues,
+    setError,
     formState: { errors },
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<validateFields> = (email, password) => {
-    console.log(email);
-    console.log(password);
+  const onSubmit: SubmitHandler<validateFields> = () => {
+    const auth = getAuth();
+    const { email, password } = getValues();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            id: user.uid,
+            email: user.email,
+            token: user.refreshToken,
+          })
+        );
+        history('/');
+      })
+      .catch((e) => {
+        setError('form', { type: 'form', message: e.message });
+      });
   };
 
   return (
     <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
+      {<span role="alert">{errors.form?.message}</span>}
       <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
         <input
           {...register('email', {
@@ -60,7 +86,7 @@ const LoginForm: FC = () => {
       <div className={styles.form_group}>
         <Button title="Login" type="submit" />
         or
-        <a href="">sign Up</a>
+        <Link to="/register">sign up</Link>
       </div>
     </form>
   );
