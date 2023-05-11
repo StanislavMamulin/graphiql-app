@@ -2,7 +2,7 @@
   margin: 11px;
   align-self: flex-start;
   width: 100px;
-
+  cursor: pointer;
   transition: margin var(--animation-duration);
 }
 
@@ -14,6 +14,7 @@
   border: 1px solid var(--main-color);
   background-color: transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .lang__button:hover {

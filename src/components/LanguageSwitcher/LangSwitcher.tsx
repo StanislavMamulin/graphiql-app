@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import styles from './LangSwitcher.module.css';
 import { FlagImg } from './FlagImg';
 import { LangItem, languageOptions } from './languageOptions';
+import { useTranslation } from 'react-i18next';
 
 const defaultLangFlag = <FlagImg src={languageOptions[0].flagimg} alt={languageOptions[0].name} />;
 
@@ -32,9 +33,12 @@ export const LangSwitcher = ({ small }: LangSwitcherProps) => {
       window.addEventListener('click', clickHandler);
     }
   };
+  const { i18n } = useTranslation();
 
   const selectListItem = (lang: LangItem) => {
     setLangFlag(<FlagImg src={lang.flagimg} alt={lang.name} />);
+    i18n.changeLanguage(lang.id);
+    localStorage.setItem('lng', lang.id);
     setShowDropdown(false);
     window.removeEventListener('click', clickHandler);
   };
