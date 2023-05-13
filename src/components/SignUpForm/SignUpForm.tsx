@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { setUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useNavigate } from 'react-router-dom';
+import FormInput from '../FormInput/FormInput';
 
 const SignUpForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -58,62 +59,69 @@ const SignUpForm: FC = () => {
   };
 
   return (
-    <div className={styles.form_wrapper}>
-      <form className={styles.signup_form} onSubmit={handleSubmit(onSubmit)}>
-        {<span role="alert">{errors.form?.message}</span>}
+    <div
+      className={styles.form_wrapper.concat(
+        ' ',
+        errors.email || errors.password || errors.cPassword ? styles.hasError : ''
+      )}
+    >
+      <form
+        className={styles.signup_form.concat(' ', errors.form ? styles.hasError : '')}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {
+          <span role="alert" className={styles.error}>
+            {errors.form?.message}
+          </span>
+        }
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <div className={styles.inputBox}>
-            <input
-              {...register('email', {
-                required: c.en.MESSAGES.errors.required,
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: c.en.MESSAGES.errors.emailFormat,
-                },
-              })}
-              type="email"
-              placeholder="Email"
-              autoComplete="username"
-            />
-            <span>Email</span>
-          </div>
-          {<span role="alert">{errors.email?.message}</span>}
+          <FormInput
+            type="text"
+            placeholder="email"
+            name="email"
+            autoComplete="email"
+            register={register}
+            errors={errors.email?.message}
+            rules={{
+              required: c.en.MESSAGES.errors.required,
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: c.en.MESSAGES.errors.emailFormat,
+              },
+            }}
+          />
         </div>
         <div className={styles.form_group.concat(' ', errors.password ? styles.hasError : '')}>
-          <div className={styles.inputBox}>
-            <input
-              id="password"
-              {...register('password', {
-                required: c.en.MESSAGES.errors.required,
-                minLength: {
-                  value: 8,
-                  message: c.en.MESSAGES.errors.minLength,
-                },
-                validate: passwordValidation,
-              })}
-              type="password"
-              placeholder="Password"
-              autoComplete="current-password"
-            />
-            <span>Password</span>
-          </div>
-          {<span role="alert">{errors.password?.message}</span>}
+          <FormInput
+            name="password"
+            placeholder={'Password'}
+            register={register}
+            type="password"
+            autoComplete="current-password"
+            errors={errors.password?.message}
+            rules={{
+              required: c.en.MESSAGES.errors.required,
+              minLength: {
+                value: 8,
+                message: c.en.MESSAGES.errors.minLength,
+              },
+              validate: passwordValidation,
+            }}
+          />
         </div>
         <div className={styles.form_group.concat(' ', errors.cPassword ? styles.hasError : '')}>
-          <div className={styles.inputBox}>
-            <input
-              id="cPassword"
-              {...register('cPassword', {
-                required: c.en.MESSAGES.errors.required,
-                validate: passwordCompare,
-              })}
-              type="password"
-              placeholder="Confirm password"
-              autoComplete="repeat-password"
-            />
-            <span>Confirm password</span>
-          </div>
-          {<span role="alert">{errors.cPassword?.message}</span>}
+          <FormInput
+            name="cPassword"
+            register={register}
+            errors={errors.cPassword?.message}
+            rules={{
+              required: c.en.MESSAGES.errors.required,
+              validate: passwordCompare,
+            }}
+            type="password"
+            placeholder="Confirm password"
+            autoComplete="repeat-password"
+          />
         </div>
         <div className={styles.form_group}>
           <Button title="SignUp" type="submit" />

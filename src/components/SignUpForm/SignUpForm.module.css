@@ -23,6 +23,10 @@
     animation: animate 6s linear infinite;
 }
 
+.form_wrapper.hasError::before {
+    background: linear-gradient(0deg, transparent, transparent, red, red, red);
+}
+
 .form_wrapper form {
     display: flex;
     align-items: stretch;
@@ -37,7 +41,7 @@
     padding: .5em;
     border-radius: 6px;
     overflow: hidden;
-    color: #ffffff;
+    color: #000000;
 }
 
 @keyframes animate {
@@ -63,42 +67,10 @@
     color: #a5a5a5;
 }
 
-/*.signup_form {*/
-/*    display: flex;*/
-/*    align-items: stretch;*/
-/*    justify-content: center;*/
-/*    flex-wrap: wrap;*/
-/*    flex-direction: column;*/
-/*    max-width: 320px;*/
-/*    margin: 0 auto;*/
-/*    padding: .5em;*/
-/*}*/
-.inputBox input:not([value=""]) ~ span {
-    visibility: hidden;
-}
-
-.inputBox input:focus ~ span {
-    visibility: visible;
-}
-
-.inputBox input:focus ~ span {
-    color: #00dfc4;
-    transform: translate(10px) translateY(-7px);
-    font-size: 0.65em;
-    padding: 0 10px;
-    background: #1b2d3a;
-    border-left: 1px solid #00dfc4;
-    border-right: 1px solid #00dfc4;
-}
-
-.hasError .inputBox input:focus ~ span {
-    border-color: red;
-    color: red;
-}
-
 .signup_form input {
     height: 3em;
     padding: .5em;
+    color: #000000;
     border-radius: .31em;
     border: .063em solid #000000;
     font-size: 1em;
@@ -109,10 +81,10 @@
     border-color: red;
 }
 
-.signup_form [role="alert"] {
+.signup_form [role="alert"].error {
     color: red;
     text-align: center;
-    height: 1em;
+    height: 1.3em;
     line-height: 1.1em;
     font-size: .8em;
 }
@@ -126,7 +98,8 @@
     flex-direction: column;
     align-items: stretch;
 }
-.signup_form .form_group:last-child{
+
+.signup_form .form_group:last-child {
     margin: .5em 0;
     flex-direction: row;
     align-items: center;
