@@ -1,5 +1,5 @@
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
-import styles from './Input.module.css';
+import styles from './FormInput.module.css';
 import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
 
 type FormFieldsType = 'email' | 'password' | 'cPassword';
@@ -11,14 +11,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   rules?: RegisterOptions;
 }
 
-const Input: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...rest }) => {
+const FormInput: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...rest }) => {
   const [show, setShow] = useState(true);
 
   const inputRef = useRef(null);
   const { type } = rest;
 
   const { ref, ...restRegister } = register && register(name, rules);
-  const handleView = () => {
+  const handleViewPassword = () => {
     inputRef.current.attributes.type.value === 'password'
       ? (inputRef.current.attributes.type.value = 'text')
       : (inputRef.current.attributes.type.value = 'password');
@@ -39,7 +39,7 @@ const Input: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...
         />
         <span>{placeholder}</span>
         {type === 'password' && (
-          <input type="checkbox" onChange={handleView} title="Show password" />
+          <input type="checkbox" onChange={handleViewPassword} title="Show password" />
         )}
       </div>
 
@@ -50,4 +50,4 @@ const Input: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...
   );
 };
 
-export default Input;
+export default FormInput;

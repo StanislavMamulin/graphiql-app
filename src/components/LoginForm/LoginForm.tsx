@@ -7,7 +7,7 @@ import { Button } from '../Button/Button';
 import { setUser } from '../../redux/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import Input from '../Input/Input';
+import FormInput from '../FormInput/FormInput';
 
 interface validateFields {
   email: string;
@@ -67,7 +67,7 @@ const LoginForm: FC = () => {
           </span>
         }
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <Input
+          <FormInput
             type="text"
             placeholder="email"
             name="email"
@@ -83,7 +83,7 @@ const LoginForm: FC = () => {
           />
         </div>
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <Input
+          <FormInput
             name="password"
             placeholder={'Password'}
             register={register}
