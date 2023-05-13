@@ -50,45 +50,51 @@ const LoginForm: FC = () => {
   };
 
   return (
-    <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-      {<span role="alert">{errors.form?.message}</span>}
-      <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-        <input
-          {...register('email', {
-            required: c.en.MESSAGES.errors.required,
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: c.en.MESSAGES.errors.emailFormat,
-            },
-          })}
-          type="email"
-          placeholder="email"
-          autoComplete="username"
-        />
-        {<span role="alert">{errors.email?.message}</span>}
-      </div>
-      <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-        <input
-          id="password"
-          {...register('password', {
-            required: c.en.MESSAGES.errors.required,
-            minLength: {
-              value: 8,
-              message: c.en.MESSAGES.errors.minLength,
-            },
-          })}
-          type="password"
-          placeholder="password"
-          autoComplete="current-password"
-        />
-        {<span role="alert">{errors.password?.message}</span>}
-      </div>
-      <div className={styles.form_group}>
-        <Button title="Login" type="submit" />
-        or
-        <Link to="/register">sign up</Link>
-      </div>
-    </form>
+    <div className={styles.form_wrapper}>
+      <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
+        {<span role="alert">{errors.form?.message}</span>}
+        <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
+          <div className={styles.inputBox}>
+            <input
+              {...register('email', {
+                required: c.en.MESSAGES.errors.required,
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: c.en.MESSAGES.errors.emailFormat,
+                },
+              })}
+              type="text"
+              autoComplete="username"
+            />
+            <span>Email</span>
+          </div>
+          {<span role="alert">{errors.email?.message}</span>}
+        </div>
+        <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
+          <div className={styles.inputBox}>
+            <input
+              id="password"
+              {...register('password', {
+                required: c.en.MESSAGES.errors.required,
+                minLength: {
+                  value: 8,
+                  message: c.en.MESSAGES.errors.minLength,
+                },
+              })}
+              type="password"
+              autoComplete="current-password"
+            />
+            <span>Password</span>
+          </div>
+          {<span role="alert">{errors.password?.message}</span>}
+        </div>
+        <div className={styles.form_group}>
+          <Button title="Login" type="submit" />
+          or
+          <Link to="/register">sign up</Link>
+        </div>
+      </form>
+    </div>
   );
 };
 
