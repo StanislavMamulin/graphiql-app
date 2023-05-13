@@ -71,6 +71,7 @@ const LoginForm: FC = () => {
             type="text"
             placeholder="email"
             name="email"
+            autoComplete="email"
             register={register}
             errors={errors.email?.message}
             rules={{
