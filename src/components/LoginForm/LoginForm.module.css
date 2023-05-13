@@ -1,7 +1,7 @@
 .form_wrapper {
     position: relative;
-    width: 320px;
-    height: 420px;
+    width: 300px;
+    height: 350px;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -23,6 +23,10 @@
     animation: animate 6s linear infinite;
 }
 
+.form_wrapper.hasError::before {
+    background: linear-gradient(0deg, transparent, transparent, red, red, red);
+}
+
 .form_wrapper form {
     display: flex;
     align-items: stretch;
@@ -37,7 +41,7 @@
     padding: .5em;
     border-radius: 6px;
     overflow: hidden;
-    color: #ffffff;
+    color: #000000;
 }
 
 @keyframes animate {
@@ -73,30 +77,11 @@
     width: 100%;
 }
 
-.inputBox input:focus ~ span {
-    color: #00dfc4;
-    transform: translate(10px) translateY(-7px);
-    font-size: 0.65em;
-    padding: 0 10px;
-    background: #1b2d3a;
-    border-left: 1px solid #00dfc4;
-    border-right: 1px solid #00dfc4;
-}
-
-.hasError .inputBox input:focus ~ span {
-    border-color: red;
-    color: red;
-}
-
-.login_form {
-    color: #ffffff;
-}
-
 .login_form .hasError input {
     border-color: red;
 }
 
-.login_form [role="alert"] {
+.login_form [role="alert"].error {
     color: red;
     text-align: center;
     height: 1.3em;

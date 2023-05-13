@@ -7,6 +7,7 @@ import { Button } from '../Button/Button';
 import { setUser } from '../../redux/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
+import Input from '../Input/Input';
 
 interface validateFields {
   email: string;
@@ -50,43 +51,53 @@ const LoginForm: FC = () => {
   };
 
   return (
-    <div className={styles.form_wrapper}>
-      <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-        {<span role="alert">{errors.form?.message}</span>}
+    <div
+      className={styles.form_wrapper.concat(
+        ' ',
+        errors.email || errors.password ? styles.hasError : ''
+      )}
+    >
+      <form
+        className={styles.login_form.concat(' ', errors.form ? styles.hasError : '')}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {
+          <span role="alert" className={styles.error}>
+            {errors.form?.message}
+          </span>
+        }
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <div className={styles.inputBox}>
-            <input
-              {...register('email', {
-                required: c.en.MESSAGES.errors.required,
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: c.en.MESSAGES.errors.emailFormat,
-                },
-              })}
-              type="text"
-              autoComplete="username"
-            />
-            <span>Email</span>
-          </div>
-          {<span role="alert">{errors.email?.message}</span>}
+          <Input
+            type="text"
+            placeholder="email"
+            name="email"
+            register={register}
+            errors={errors.email?.message}
+            rules={{
+              required: c.en.MESSAGES.errors.required,
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: c.en.MESSAGES.errors.emailFormat,
+              },
+            }}
+          />
         </div>
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <div className={styles.inputBox}>
-            <input
-              id="password"
-              {...register('password', {
-                required: c.en.MESSAGES.errors.required,
-                minLength: {
-                  value: 8,
-                  message: c.en.MESSAGES.errors.minLength,
-                },
-              })}
-              type="password"
-              autoComplete="current-password"
-            />
-            <span>Password</span>
-          </div>
-          {<span role="alert">{errors.password?.message}</span>}
+          <Input
+            name="password"
+            placeholder={'Password'}
+            register={register}
+            type="password"
+            autoComplete="current-password"
+            errors={errors.password?.message}
+            rules={{
+              required: c.en.MESSAGES.errors.required,
+              minLength: {
+                value: 8,
+                message: c.en.MESSAGES.errors.minLength,
+              },
+            }}
+          />
         </div>
         <div className={styles.form_group}>
           <Button title="Login" type="submit" />
