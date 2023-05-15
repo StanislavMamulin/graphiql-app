@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './GraphqlEditor.module.css';
 import MonacoEditor from '../MonacoEditor/MonacoEditor';
+import RunButton from '../RunButton/RunButton';
 
 // const fetcher = createGraphiQLFetcher({
 //     url: 'https://rickandmortyapi.com/graphql',
@@ -50,7 +51,7 @@ export default function GraphqlEditor() {
   // if (isLoading) return <p>Loading...</p>;
   return (
     <div className={styles.editorWrapper}>
-      <button onClick={handleRequest}>Run</button>
+      <RunButton onClick={handleRequest} />
       <div className={styles.editor}>
         <MonacoEditor
           height="300px"

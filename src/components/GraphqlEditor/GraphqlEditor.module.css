@@ -9,8 +9,10 @@
     flex: 0 1 auto;
 }
 
-.editorWrapper > button {
+.editorWrapper > *:nth-child(1) {
     flex: 0 1 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .editorWrapper .editor {
