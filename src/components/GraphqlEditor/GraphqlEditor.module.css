@@ -1,0 +1,25 @@
+.editorWrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.editorWrapper > * {
+    margin: 5px;
+    padding: 5px;
+    flex: 0 1 auto;
+}
+
+.editorWrapper > button {
+    flex: 0 1 100%;
+}
+
+.editorWrapper .editor {
+    flex: 1 1 auto;
+    border: 1px solid #000;
+}
+
+.editorWrapper .result {
+    flex: 1 1 auto;
+    border: 1px solid #000;
+    width: 50vw;
+}
