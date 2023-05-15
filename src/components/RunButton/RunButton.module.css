@@ -1,0 +1,32 @@
+.btn {
+    position: relative;
+    cursor: pointer;
+}
+
+.btn .run {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to bottom, #444, #222);
+    border-radius: 50%;
+    display: flex;
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.btn .run::before {
+    content: '';
+    position: absolute;
+    border: 25px solid #ffffff;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 0 solid transparent;
+    transform: translateX(5px);
+}
+
+.btn .run:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+}
