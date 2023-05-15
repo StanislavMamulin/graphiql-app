@@ -1,14 +1,13 @@
 import { FC } from 'react';
-import SignUp from '../components/SignUp/SignUp';
+import SignUpForm from '../components/SignUpForm/SignUpForm';
+import { NavLink } from 'react-router-dom';
 
 const RegisterPage: FC = () => {
   return (
     <div>
       <h1>Register</h1>
-      <SignUp />
-      <center>
-        Already have an account? <a href="/login">Sign in</a>
-      </center>
+      <SignUpForm />
+      <NavLink to="/">Go back home</NavLink>
     </div>
   );
 };

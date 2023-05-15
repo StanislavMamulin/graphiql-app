@@ -1,18 +1,18 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 export default function NotFound() {
+  const { t } = useTranslation();
+
   return (
     <>
-      <main className="">
-        <div className="">
-          <p className="">404</p>
-          <h2 className="">Page not found</h2>
-          <p className="">Sorry, we couldn’t find the page you’re looking for.</p>
-          <div className="">
-            <NavLink className="" to="/">
-              Go back home
-            </NavLink>
+      <main>
+        <div>
+          <p>404</p>
+          <h2>{t('404.mess1')}</h2>
+          <p>{t('404.mess2')}</p>
+          <div>
+            <NavLink to="/">{t('404.route')}</NavLink>
           </div>
         </div>
       </main>
