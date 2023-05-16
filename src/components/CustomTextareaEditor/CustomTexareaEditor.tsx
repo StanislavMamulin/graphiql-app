@@ -4,7 +4,6 @@ import { parse } from 'graphql';
 
 interface Props {
   value: string;
-  onChange: () => void;
   editable?: boolean;
   onMount?: (ref) => void;
   mode: 1 | 0; // 1 -  editor, 0 - response
