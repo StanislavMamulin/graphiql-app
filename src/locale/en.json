@@ -6,6 +6,8 @@
         "route": "Go back home"
     },
     "auth": {
+        "or": "or",
+        "login": "Login",
         "register": "Register",
         "signin": "Sign in",
         "signup": "Sign up",

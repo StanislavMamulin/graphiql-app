@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './LoginForm.module.css';
 import { Button } from '../Button/Button';
+import { NavLink } from 'react-router-dom';
 
 interface validateFields {
   email: string;
@@ -58,9 +59,9 @@ const LoginForm: FC = () => {
         {<span role="alert">{errors.password?.message}</span>}
       </div>
       <div className={styles.form_group}>
-        <Button title="Login" type="submit" />
+        <Button title="Login" type="submit" clickHandler={() => {}} />
         or
-        <a href="">sign Up</a>
+        <NavLink to="/register">sign up</NavLink>
       </div>
     </form>
   );

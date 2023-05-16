@@ -2,12 +2,12 @@ import { LangSwitcher } from '../components/LanguageSwitcher/LangSwitcher';
 import { Button } from '../components/Button/Button';
 import { useTranslation } from 'react-i18next';
 import styles from './WelcomePage.module.css';
-// import { useDispatch } from 'react-redux';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-export const WelcomePage = () => {
+const WelcomePage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
-  // const dispatch = useDispatch();
   const { isAuth } = useAuth();
 
   return (
@@ -29,13 +29,13 @@ export const WelcomePage = () => {
           <div className={styles.user_btns_auth}>
             {!isAuth ? (
               <>
-                <Button title="Sign in" clickHandler={() => console.log('clicked')} />
-                <Button title="Sign up" clickHandler={() => console.log('clicked')} />
+                <Button title={t('auth.signin')} clickHandler={() => navigate('/login')} />
+                <Button title={t('auth.signup')} clickHandler={() => navigate('/register')} />
               </>
             ) : (
               <>
-                <Button title="Go to Main Page" clickHandler={() => console.log('clicked')} />
-                <Button title="Sign out" clickHandler={() => console.log('clicked')} />
+                <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />
+                <Button title={t('auth.signout')} clickHandler={() => navigate('/')} />
               </>
             )}
           </div>

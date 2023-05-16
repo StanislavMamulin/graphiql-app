@@ -3,6 +3,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './SignUpForm.module.css';
 import { Button } from '../Button/Button';
+import { NavLink } from 'react-router-dom';
 
 const SignUpForm: FC = () => {
   const {
@@ -82,9 +83,9 @@ const SignUpForm: FC = () => {
         {<span role="alert">{errors.cPassword?.message}</span>}
       </div>
       <div className={styles.form_group}>
-        <Button title="SignUp" type="submit" />
+        <Button title="SignUp" type="submit" clickHandler={() => {}} />
         or
-        <a href="">sign in</a>
+        <NavLink to="/login">sign in</NavLink>
       </div>
     </form>
   );

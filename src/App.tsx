@@ -7,7 +7,6 @@ import { Footer } from './components/Footer/Footer';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MainPage from './pages/MainPage';
-import { RequireAuth } from './hoc/RequireAuth';
 
 export const App = () => {
   return (

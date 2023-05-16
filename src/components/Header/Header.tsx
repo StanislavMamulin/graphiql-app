@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import styles from './Header.module.css';
 import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const STICKY_THRESHOLD_PX = 100;
 
 export function Header() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
@@ -32,10 +35,10 @@ export function Header() {
   return (
     <header className={getHeaderClass()}>
       <NavLink className="" to="/">
-        Welcome
+        {t('welcome')}
       </NavLink>
       <LangSwitcher small={sticky} />
-      <Button title="Sign out" clickHandler={() => console.log('clicked')} />
+      <Button title={t('auth.signout')} clickHandler={() => navigate('/')} />
     </header>
   );
 }
