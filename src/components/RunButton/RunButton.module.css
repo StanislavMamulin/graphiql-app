@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     z-index: 3;
+    margin: 1em;
 }
 
 .btn .run::before {
@@ -27,6 +28,5 @@
 }
 
 .btn .run:active {
-    box-shadow: 0 1px #666;
     transform: translateY(4px);
 }
