@@ -23,11 +23,7 @@ export const rickAndMortyApi = createApi({
   }),
   endpoints: (builder) => ({
     sendRequest: builder.query({
-      query: (request: GraphQLQueryProps) => ({
-        document: request.document,
-        variables: request.variables,
-        headers: request.headers,
-      }),
+      query: (request: GraphQLQueryProps) => request,
     }),
   }),
 });
