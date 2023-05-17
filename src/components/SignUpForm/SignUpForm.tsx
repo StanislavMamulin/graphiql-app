@@ -74,6 +74,7 @@ const SignUpForm: FC = () => {
             {errors.form?.message}
           </span>
         }
+        <h2>Sign up</h2>
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
           <FormInput
             type="text"

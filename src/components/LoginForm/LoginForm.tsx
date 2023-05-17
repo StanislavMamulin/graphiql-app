@@ -66,6 +66,7 @@ const LoginForm: FC = () => {
             {errors.form?.message}
           </span>
         }
+        <h2>Login</h2>
         <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
           <FormInput
             type="text"
