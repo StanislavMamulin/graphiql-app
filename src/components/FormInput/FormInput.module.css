@@ -1,0 +1,96 @@
+.inputBox {
+    position: relative;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: .75em;
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+    color: #a5a5a5;
+}
+
+.inputBox input:focus ~ span {
+    color: #00dfc4;
+    transform: translate(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #1b2d3a;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+}
+
+.hasError .inputBox input:focus ~ span {
+    border-color: red;
+    color: red;
+}
+
+.inputBox input:not([value=""]) ~ span {
+    visibility: hidden;
+}
+
+.inputBox input:focus ~ span {
+    visibility: visible;
+}
+
+.inputBox {
+    position: relative;
+    padding-bottom: 1.1em;
+}
+
+.inputBox.hasError {
+    padding-bottom: 0;
+}
+
+[role="alert"].error {
+    color: red;
+    text-align: center;
+    height: 1.3em;
+    line-height: 1.1em;
+    font-size: .8em;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: .75em;
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+    color: #a5a5a5;
+}
+
+.inputBox input {
+    height: 3em;
+    padding: .5em;
+    color: #000000;
+    border-radius: .31em;
+    border: .063em solid #000000;
+    font-size: 1em;
+    width: 100%;
+}
+.inputBox [type="checkbox"]{
+    position: absolute;
+    top: 0;
+    right: 0.5em;
+    width: 2em;
+    cursor: pointer;
+}
+
+.inputBox input:focus ~ span {
+    color: #00dfc4;
+    transform: translate(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #1b2d3a;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+}
+
+.hasError input:focus ~ span {
+    border-color: red;
+    color: red;
+}
+
