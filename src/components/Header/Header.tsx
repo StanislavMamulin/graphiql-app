@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import styles from './Header.module.css';
 import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
+import { NavLink } from 'react-router-dom';
 
 const STICKY_THRESHOLD_PX = 100;
 
@@ -30,6 +31,9 @@ export function Header() {
 
   return (
     <header className={getHeaderClass()}>
+      <NavLink className="" to="/">
+        Welcome
+      </NavLink>
       <LangSwitcher small={sticky} />
       <Button title="Sign out" clickHandler={() => console.log('clicked')} />
     </header>

@@ -81,10 +81,10 @@
     border-color: red;
 }
 
-.signup_form [role="alert"].error {
+.signup_form [role="alert"] {
     color: red;
     text-align: center;
-    height: 1.3em;
+    height: 1em;
     line-height: 1.1em;
     font-size: .8em;
 }
