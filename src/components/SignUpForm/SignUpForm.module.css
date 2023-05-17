@@ -81,7 +81,7 @@
     border-color: red;
 }
 
-.signup_form [role="alert"] {
+.signup_form [role="alert"].error {
     color: red;
     text-align: center;
     height: 1em;
