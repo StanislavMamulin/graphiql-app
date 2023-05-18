@@ -13,6 +13,8 @@
     "@monaco-editor/react": "^4.5.1",
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^9.21.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^6.0.0",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",
