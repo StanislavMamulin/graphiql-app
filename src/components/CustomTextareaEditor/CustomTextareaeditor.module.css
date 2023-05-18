@@ -1,0 +1,56 @@
+.inputBox {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.inputBox textarea {
+    resize: none;
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    margin: 0;
+    background: linear-gradient(to bottom, #444, #222);
+    color: #fff;
+    font-size: 1em;
+    border: 1px solid;
+}
+
+.inputBox.hasError {
+    padding-bottom: 0;
+}
+
+.inputBox div {
+    display: inline;
+    position: absolute;
+    left: 0;
+    padding: .75em;
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+    color: #a5a5a5;
+}
+
+.inputBox .error {
+    color: red;
+}
+
+.inputBox textarea ~ div {
+    color: #00dfc4;
+    transform: translate(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #efefef;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+}
+
+.inputBox textarea ~ div span {
+    margin-left: 5px;
+}
+
+.inputBox .lineNumber {
+    display: flex;
+    flex-direction: column;
+}

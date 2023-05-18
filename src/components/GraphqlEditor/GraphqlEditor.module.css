@@ -1,0 +1,31 @@
+.editorWrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.editorWrapper > * {
+    margin: 0;
+    padding: 0;
+    flex: 0 1 auto;
+}
+
+.editorWrapper > *:nth-child(1) {
+    flex: 0 1 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.editorWrapper .editor {
+    flex: 1 1 auto;
+    border: 1px solid #000;
+}
+
+.editorWrapper .editor textarea {
+    width: 100%;
+    resize: none;
+}
+
+.editorWrapper .result {
+    flex: 1 1 auto;
+    border: 1px solid #000;
+}
