@@ -105,14 +105,14 @@ export function TabBlock(): JSX.Element {
             title={TabsTypes.VARIABLES}
             changeHandler={textChangeHandler}
             errorText={editorError.varsErrorText}
-            value={JSON.stringify(variables)}
+            value={JSON.stringify(variables, null, 1)}
           />
           <Editor
             show={showHeaders}
             title={TabsTypes.HEADERS}
             changeHandler={textChangeHandler}
             errorText={editorError.headersErrorText}
-            value={JSON.stringify(headers)}
+            value={JSON.stringify(headers, null, 1)}
           />
         </div>
       )}
