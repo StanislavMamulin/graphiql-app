@@ -15,10 +15,6 @@
   align-items: stretch;
 }
 
-.tabs__editorscontainer_hide {
-  height: 0;
-}
-
 .tabs__editor {
   background-color: whitesmoke;
   border: 2px solid;

@@ -36,10 +36,6 @@ export function TabBlock(): JSX.Element {
 
   const { variables, headers } = useSelector((state: RootState) => state.requestParameters);
 
-  const editorContainerClasses = classNames(styles.tabs__editorscontainer, {
-    [styles.tabs__editorscontainer_hide]: !showVars && !showHeaders,
-  });
-
   const setError = (type: TabsTypes, message: string) => {
     if (type === TabsTypes.HEADERS) {
       setEditorError({ ...editorError, headersErrorText: message });
@@ -102,22 +98,24 @@ export function TabBlock(): JSX.Element {
           )}
         />
       </div>
-      <div className={editorContainerClasses}>
-        <Editor
-          show={showVars}
-          title={TabsTypes.VARIABLES}
-          changeHandler={textChangeHandler}
-          errorText={editorError.varsErrorText}
-          value={JSON.stringify(variables)}
-        />
-        <Editor
-          show={showHeaders}
-          title={TabsTypes.HEADERS}
-          changeHandler={textChangeHandler}
-          errorText={editorError.headersErrorText}
-          value={JSON.stringify(headers)}
-        />
-      </div>
+      {(showVars || showHeaders) && (
+        <div className={styles.tabs__editorscontainer}>
+          <Editor
+            show={showVars}
+            title={TabsTypes.VARIABLES}
+            changeHandler={textChangeHandler}
+            errorText={editorError.varsErrorText}
+            value={JSON.stringify(variables)}
+          />
+          <Editor
+            show={showHeaders}
+            title={TabsTypes.HEADERS}
+            changeHandler={textChangeHandler}
+            errorText={editorError.headersErrorText}
+            value={JSON.stringify(headers)}
+          />
+        </div>
+      )}
     </div>
   );
 }
