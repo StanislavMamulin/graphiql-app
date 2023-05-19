@@ -10,10 +10,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-  background-color: var(--action-button-hover);
+  box-shadow: inset 0 0 0 99999px rgba(0, 0, 0, 0.2);
 }
 
 .button:active {
