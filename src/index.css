@@ -24,6 +24,8 @@
   --action-button-color: var(--ocean-green);
   --action-button-hover: var(--salem);
   --action-button-pressed: #0c7032;
+
+  --border-radius: 5px;
 }
 
 a {

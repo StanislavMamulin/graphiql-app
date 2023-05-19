@@ -17,5 +17,12 @@
     },
     "apiError": {
 
+    },
+    "editorErrors": {
+        "syntaxError": "Syntax error"
+    },
+    "editor": {
+        "queryVariables": "Query variables",
+        "httpHeaders": "HTTP Headers"
     }
 }
