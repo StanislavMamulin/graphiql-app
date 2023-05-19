@@ -28,4 +28,4 @@ export const rickAndMortyApi = createApi({
   }),
 });
 
-export const { useSendRequestQuery } = rickAndMortyApi;
+export const { useSendRequestQuery, useLazySendRequestQuery } = rickAndMortyApi;
