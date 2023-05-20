@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
-import { rickAndMortyApi } from '../services/rickAndMortyAPI';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+
+import userReducer from './slices/userSlice';
+import requestReducer from './slices/requestParametersSlice';
+import { rickAndMortyApi } from '../services/rickAndMortyAPI';
 
 const rootReducer = combineReducers({
   user: userReducer,
+  requestParameters: requestReducer,
   [rickAndMortyApi.reducerPath]: rickAndMortyApi.reducer,
 });
 
