@@ -10,9 +10,9 @@ import {
   GraphQLEnumType,
 } from 'graphql';
 import { useState, useEffect } from 'react';
-import styles from './Editor.module.css';
+import styles from './Doc.module.css';
 
-type DocField = {
+interface IDocField {
   [index: string]:
     | string
     | null
@@ -25,18 +25,27 @@ type DocField = {
   description: string | null;
   type: string | null;
   value: string | null;
-};
+}
 
-type DocType = {
+interface IDocType {
   name: string;
   description: string | null;
-  fields: DocField[] | null;
+  fields: IDocField[] | null;
+}
+
+type DocProps = {
+  isOpen: boolean;
 };
 
-const Documentation = () => {
+const Documentation = ({ isOpen }: DocProps) => {
   const [schema, setSchema] = useState<GraphQLSchema>();
-  const [types, setTypes] = useState<DocType[]>([]);
-  const [selectedType, setSelectedType] = useState<DocType>();
+  const [types, setTypes] = useState<IDocType[]>([]);
+  const [selectedType, setSelectedType] = useState<IDocType>();
+
+  let docClasses = styles.documentation;
+  if (isOpen) {
+    docClasses += ' ' + styles.documentation_showed;
+  }
 
   useEffect(() => {
     async function fetchSchema() {
@@ -51,8 +60,8 @@ const Documentation = () => {
       const clientSchema = buildClientSchema(data);
       setSchema(clientSchema);
     }
-    fetchSchema();
-  }, []);
+    isOpen ? fetchSchema() : null;
+  }, [isOpen]);
 
   useEffect(() => {
     if (schema) {
@@ -62,7 +71,7 @@ const Documentation = () => {
         .filter((typeName) => !typeName.startsWith('__'))
         .map((typeName) => {
           const type = typeMap[typeName];
-          let typeFields: DocField[] | undefined;
+          let typeFields: IDocField[] | undefined;
 
           if (
             type instanceof GraphQLObjectType ||
@@ -101,7 +110,7 @@ const Documentation = () => {
     }
   }, [schema]);
 
-  function handleSelectType(type: DocType) {
+  function handleSelectType(type: IDocType) {
     setSelectedType(type);
   }
 
@@ -113,31 +122,33 @@ const Documentation = () => {
   }
 
   return (
-    <div className={styles.documentation}>
-      <div>
-        <h2>Docs</h2>
-        <ul>
-          {types.map((type) => (
-            <li key={type.name} onClick={() => handleSelectType(type)}>
-              <h4>{type.name}</h4>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className={docClasses}>
+      {/* <h2 className={styles.title}>Docs</h2> */}
       <div>
         {selectedType ? (
           <div>
-            <h3>{selectedType.name}</h3>
+            <h3 className={styles.subtitle}>{selectedType.name}</h3>
             {selectedType.description && <p>{selectedType.description}</p>}
             {selectedType.fields?.map((field) => (
-              <div key={field.name} onClick={() => handleSelectField(field.type || '')}>
-                <h4>{field.name}</h4> : <span>{field.type || field.value}</span>
+              <div
+                className={styles.field}
+                key={field.name}
+                onClick={() => handleSelectField(field.type || '')}
+              >
+                <h4 className={styles.field_title}>{field.name}</h4> :
+                <span className={styles.field_type}>{field.type || field.value}</span>
                 {field.description && <p>{field.description}</p>}
               </div>
             ))}
           </div>
         ) : (
-          <p>Loading...</p>
+          <ul className={styles.type_list}>
+            {types.map((type) => (
+              <li key={type.name} onClick={() => handleSelectType(type)}>
+                <h4>{type.name}</h4>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>
