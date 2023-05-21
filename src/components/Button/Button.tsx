@@ -2,7 +2,7 @@ import styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
-  clickHandler: () => void;
+  clickHandler?: () => void;
   extraClass?: string;
 }
 
