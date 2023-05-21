@@ -1,6 +1,3 @@
-import { useNavigate } from 'react-router';
-import { useTranslation } from 'react-i18next';
-
 import { LangSwitcher } from '../components/LanguageSwitcher/LangSwitcher';
 import { Button } from '../components/Button/Button';
 
@@ -14,7 +11,6 @@ import { removeUser } from '../redux/slices/userSlice';
 import styles from './WelcomePage.module.css';
 
 const WelcomePage = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
@@ -44,7 +40,7 @@ const WelcomePage = () => {
               </>
             ) : (
               <>
-                <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />              
+                <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />
                 <Button
                   title={t('auth.signout')}
                   clickHandler={async () => {
