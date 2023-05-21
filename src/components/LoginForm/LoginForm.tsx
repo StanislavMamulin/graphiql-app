@@ -16,6 +16,7 @@ interface validateFields {
 }
 
 const LoginForm: FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const history = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -109,14 +110,14 @@ const LoginForm: FC = () => {
         </div>
         <div className={styles.form_group}>
           <Button
-            title="Login"
+            title="{t('auth.signin')}"
             type="submit"
             clickHandler={() => {
               clearErrors();
             }}
           />
           or
-          <Link to="/register">sign up</Link>
+          <Link to="/register">{t('auth.signup')}</Link>
         </div>
       </form>
     </div>

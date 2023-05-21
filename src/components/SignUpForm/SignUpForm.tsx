@@ -11,6 +11,7 @@ import FormInput from '../FormInput/FormInput';
 import { Spinner } from '../../components/Spinner/Spinner';
 
 const SignUpForm: FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const history = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -132,14 +133,14 @@ const SignUpForm: FC = () => {
         </div>
         <div className={styles.form_group}>
           <Button
-            title="SignUp"
+            title={t('auth.signup')}
             type="submit"
             clickHandler={() => {
               clearErrors();
             }}
           />
           or
-          <Link to="/login">sign in</Link>
+          <Link to="/login">{t('auth.signin')}</Link>
         </div>
       </form>
     </div>

@@ -3,14 +3,18 @@ import { useTranslation } from 'react-i18next';
 
 import { LangSwitcher } from '../components/LanguageSwitcher/LangSwitcher';
 import { Button } from '../components/Button/Button';
+
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import { signOutUser } from '../services/firebase/auth';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { removeUser } from '../redux/slices/userSlice';
 
 import styles from './WelcomePage.module.css';
 
-export const WelcomePage = () => {
+const WelcomePage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
@@ -35,29 +39,14 @@ export const WelcomePage = () => {
           <div className={styles.user_btns_auth}>
             {!isAuth ? (
               <>
-                <Button
-                  title="Sign in"
-                  clickHandler={() => {
-                    navigate('/login');
-                  }}
-                />
-                <Button
-                  title="Sign up"
-                  clickHandler={() => {
-                    navigate('/register');
-                  }}
-                />
+                <Button title={t('auth.signin')} clickHandler={() => navigate('/login')} />
+                <Button title={t('auth.signup')} clickHandler={() => navigate('/register')} />
               </>
             ) : (
               <>
+                <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />              
                 <Button
-                  title="Go to Main Page"
-                  clickHandler={() => {
-                    navigate('/main');
-                  }}
-                />
-                <Button
-                  title="Sign out"
+                  title={t('auth.signout')}
                   clickHandler={async () => {
                     await signOutUser();
                     dispatch(removeUser());

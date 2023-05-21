@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
 import { Button } from '../../components/Button/Button';
 import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { signOutUser } from '../../services/firebase/auth';
 import { removeUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';
@@ -12,6 +12,8 @@ import styles from './Header.module.css';
 const STICKY_THRESHOLD_PX = 100;
 
 export function Header() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [sticky, setSticky] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -38,11 +40,11 @@ export function Header() {
   return (
     <header className={getHeaderClass()}>
       <NavLink className="" to="/">
-        Welcome
+        {t('welcome')}
       </NavLink>
       <LangSwitcher small={sticky} />
       <Button
-        title="Sign out"
+        title={t('auth.signout')}
         clickHandler={async () => {
           await signOutUser();
           dispatch(removeUser());
