@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './SignUpForm.module.css';
@@ -8,16 +8,19 @@ import { setUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 const SignUpForm: FC = () => {
   const dispatch = useAppDispatch();
   const history = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     getValues,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     mode: 'onSubmit',
@@ -27,10 +30,11 @@ const SignUpForm: FC = () => {
   const onSubmit: SubmitHandler<FieldValues> = () => {
     const auth = getAuth();
     const { email, password } = getValues();
+    setIsSubmitting(true);
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
+        setIsSubmitting(false);
         dispatch(
           setUser({
             id: user.uid,
@@ -38,9 +42,10 @@ const SignUpForm: FC = () => {
             token: user.refreshToken,
           })
         );
-        history('/');
+        history('/main');
       })
       .catch((e) => {
+        setIsSubmitting(false);
         setError('form', { type: 'form', message: e.message });
       });
   };
@@ -65,6 +70,7 @@ const SignUpForm: FC = () => {
         errors.email || errors.password || errors.cPassword ? styles.hasError : ''
       )}
     >
+      {isSubmitting && <Spinner />}
       <form
         className={styles.signup_form.concat(' ', errors.form ? styles.hasError : '')}
         onSubmit={handleSubmit(onSubmit)}
@@ -125,7 +131,13 @@ const SignUpForm: FC = () => {
           />
         </div>
         <div className={styles.form_group}>
-          <Button title="SignUp" type="submit" />
+          <Button
+            title="SignUp"
+            type="submit"
+            clickHandler={() => {
+              clearErrors();
+            }}
+          />
           or
           <Link to="/login">sign in</Link>
         </div>
