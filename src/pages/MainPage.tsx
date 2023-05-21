@@ -1,19 +1,11 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import { Header } from '../components/Header/Header';
-// import { useTranslation } from 'react-i18next';
+import { FC } from 'react';
+import GraphqlEditor from '../components/GraphqlEditor/GraphqlEditor';
 
-export const MainPage = () => {
-  // const { t } = useTranslation();
-  const { isAuth } = useAuth();
-
-  return isAuth ? (
-    <>
-      <Header />
-      <div>Editor</div>
-    </>
-  ) : (
-    <Navigate to="/login" />
+export const MainPage: FC = () => {
+  return (
+    <div>
+      <GraphqlEditor />
+    </div>
   );
 };
 
