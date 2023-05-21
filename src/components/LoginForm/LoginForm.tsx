@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
@@ -8,6 +8,7 @@ import { setUser } from '../../redux/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import FormInput from '../FormInput/FormInput';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 interface validateFields {
   email: string;
@@ -17,12 +18,14 @@ interface validateFields {
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const history = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     getValues,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     mode: 'onSubmit',
@@ -32,10 +35,11 @@ const LoginForm: FC = () => {
   const onSubmit: SubmitHandler<validateFields> = () => {
     const auth = getAuth();
     const { email, password } = getValues();
+    setIsSubmitting(true);
 
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
+        setIsSubmitting(false);
         dispatch(
           setUser({
             id: user.uid,
@@ -43,9 +47,10 @@ const LoginForm: FC = () => {
             token: user.refreshToken,
           })
         );
-        history('/');
+        history('/main');
       })
       .catch((e) => {
+        setIsSubmitting(false);
         setError('form', { type: 'form', message: e.message });
       });
   };
@@ -57,6 +62,7 @@ const LoginForm: FC = () => {
         errors.email || errors.password ? styles.hasError : ''
       )}
     >
+      {isSubmitting && <Spinner />}
       <form
         className={styles.login_form.concat(' ', errors.form ? styles.hasError : '')}
         onSubmit={handleSubmit(onSubmit)}
@@ -102,7 +108,13 @@ const LoginForm: FC = () => {
           />
         </div>
         <div className={styles.form_group}>
-          <Button title="Login" type="submit" />
+          <Button
+            title="Login"
+            type="submit"
+            clickHandler={() => {
+              clearErrors();
+            }}
+          />
           or
           <Link to="/register">sign up</Link>
         </div>
