@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   User,
+  signOut,
 } from 'firebase/auth';
 import { firebaseApp } from './firebase';
 
@@ -23,6 +24,14 @@ export const createUser = async (email: string, password: string): Promise<User>
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
     return userCredential.user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const signOutUser = async (): Promise<void> => {
+  try {
+    await signOut(auth);
   } catch (error) {
     throw error;
   }
