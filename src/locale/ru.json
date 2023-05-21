@@ -19,5 +19,12 @@
     },
     "apiError": {
 
+    },
+    "editorErrors": {
+        "syntaxError": "Синтаксическая ошибка"
+    },
+    "editor": {
+        "queryVariables": "Переменные запроса",
+        "httpHeaders": "HTTP-заголовки"
     }
 }

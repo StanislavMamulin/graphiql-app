@@ -1,28 +1,94 @@
-.signup_form {
+.form_wrapper {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.form_wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 320px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, var(--salem), var(--salem), var(--salem));
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+.form_wrapper.hasError::before {
+    background: linear-gradient(0deg, transparent, transparent, red, red, red);
+}
+
+.form_wrapper form {
     display: flex;
     align-items: stretch;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
-    max-width: 320px;
+    position: absolute;
+    inset: 1px;
+    z-index: 2;
+    background: #efefef;
     margin: 0 auto;
     padding: .5em;
+    border-radius: 6px;
+    overflow: hidden;
+    color: #000000;
 }
 
-.signup_form input{
-    margin: .5em 0 0;
+.form_wrapper form h2 {
+    color: #000000;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: .1em;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.inputBox {
+    position: relative;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: .75em;
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+    color: #a5a5a5;
+}
+
+.signup_form input {
     height: 3em;
     padding: .5em;
+    color: #000000;
     border-radius: .31em;
     border: .063em solid #000000;
     font-size: 1em;
+    width: 100%;
 }
 
 .signup_form .hasError input {
     border-color: red;
 }
 
-.signup_form [role="alert"] {
+.signup_form [role="alert"].error {
     color: red;
     text-align: center;
     height: 1em;
@@ -39,7 +105,8 @@
     flex-direction: column;
     align-items: stretch;
 }
-.signup_form .form_group:last-child{
+
+.signup_form .form_group:last-child {
     margin: .5em 0;
     flex-direction: row;
     align-items: center;
