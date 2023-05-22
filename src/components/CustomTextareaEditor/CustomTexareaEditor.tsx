@@ -1,21 +1,22 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './CustomTextareaeditor.module.css';
 import { parse } from 'graphql';
+import svgImg from '../../assets/icons/format_code.svg';
 
 interface Props {
   value: string;
   editable?: boolean;
-  onMount?: (ref) => void;
+  onMount?: (ref: HTMLTextAreaElement | null) => void;
   mode: 1 | 0; // 1 -  editor, 0 - response
 }
 
 const DEFAULT_VALUE = `query{
-  characters {
-    results {
-      name
-    }
-  }
-}`;
+   characters {
+     results {
+       name 
+     } 
+   } 
+ }`;
 
 const CustomTexareaEditor: FC<Props> = ({
   value = DEFAULT_VALUE,
@@ -42,7 +43,7 @@ const CustomTexareaEditor: FC<Props> = ({
   };
 
   const handleSelect = () => {
-    const cursor = textAreaRef.current?.selectionStart || 0;
+    const cursor = textAreaRef.current?.selectionStart ?? 0;
     const currentLine = textAreaRef.current?.value.substr(0, cursor).split('\n').length;
     setCurrentLine(currentLine);
   };
@@ -51,10 +52,34 @@ const CustomTexareaEditor: FC<Props> = ({
     if (!mode) return;
     handleValidation();
   };
+  const prettifyCode = (str) => {
+    let prettyCode = '';
+    let indentLevel = 0;
+    const indent = 2;
+    const simpleStr = str.replace(/\s+/g, ' ');
+
+    for (let i = 0; i < simpleStr.length; i++) {
+      if (simpleStr[i] === '{') {
+        prettyCode += `{\n${' '.repeat(indentLevel + indent)}`;
+        indentLevel += indent;
+      } else if (simpleStr[i] === '}') {
+        indentLevel -= indent;
+        prettyCode += `\n${' '.repeat(indentLevel + 1)}}`;
+      } else {
+        prettyCode += simpleStr[i];
+      }
+    }
+
+    return prettyCode;
+  };
+  const prettify = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    textAreaRef.current.value = prettifyCode(textAreaRef?.current?.value);
+  };
 
   useEffect(() => {
     onMount && onMount(textAreaRef.current);
-  }, []);
+  }, [onMount]);
 
   useEffect(() => {
     textAreaRef.current.value = value;
@@ -71,6 +96,13 @@ const CustomTexareaEditor: FC<Props> = ({
 
   return (
     <div className={styles.inputBox}>
+      {!!mode && (
+        <a href="#" title="Prettify" onClick={(e) => prettify(e)}>
+          <span className={styles.pretty}>
+            <img src={svgImg} alt="Prettify" />
+          </span>
+        </a>
+      )}
       <textarea
         defaultValue={value}
         onChange={handleValidation}
@@ -81,7 +113,7 @@ const CustomTexareaEditor: FC<Props> = ({
         rows={2}
         cols={50}
       />
-      <div>
+      <div className={styles.inform}>
         <span>{`${currentLine}/${totalLines}`}</span>
         {error && <span className={styles.error}>{error}</span>}
       </div>

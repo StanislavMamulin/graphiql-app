@@ -1,6 +1,19 @@
+:root {
+    --input-color: #fff;
+    --input-background: linear-gradient(to bottom, #444, #222);
+    --input-error-color: red;
+    --input-inform-color: #a5a5a5;
+    --input-inform-active-color: #00dfc4;
+    --input-div-padding: .75em;
+    --font-size: 1em;
+    --input-pretty-font-size: 0.65em;
+    --input-pretty-background-color: #efefef;
+}
+
 .inputBox {
     position: relative;
     width: 100%;
+    display: flex;
     margin: 0;
     padding: 0;
 }
@@ -11,9 +24,9 @@
     height: 300px;
     padding: 10px;
     margin: 0;
-    background: linear-gradient(to bottom, #444, #222);
-    color: #fff;
-    font-size: 1em;
+    background: var(--input-background);
+    color: var(--input-color);
+    font-size: var(--font-size);
     border: 1px solid;
 }
 
@@ -22,35 +35,50 @@
 }
 
 .inputBox div {
-    display: inline;
+    display: inline-flex;
+    justify-content: flex-start;
     position: absolute;
     left: 0;
-    padding: .75em;
+    padding: var(--input-div-padding);
     pointer-events: none;
-    font-size: 1em;
+    font-size: var(--font-size);
     transition: .5s;
-    color: #a5a5a5;
+    color: var(--input-inform-color);
+}
+
+.inputBox .inform {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .inputBox .error {
-    color: red;
+    color: var(--input-error-color);
+}
+
+.inputBox .pretty {
+    margin-left: auto;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 2px;
+    padding: 0 2px;
+    top: 2px;
+    font-size: 0.65em;
 }
 
 .inputBox textarea ~ div {
-    color: #00dfc4;
+    color: var(--input-inform-active-color);
     transform: translate(10px) translateY(-7px);
     font-size: 0.65em;
     padding: 0 10px;
-    background: #efefef;
-    border-left: 1px solid #00dfc4;
-    border-right: 1px solid #00dfc4;
+    border-left: 1px solid var(--input-inform-active-color);
+    border-right: 1px solid var(--input-inform-active-color);
 }
 
 .inputBox textarea ~ div span {
-    margin-left: 5px;
-}
-
-.inputBox .lineNumber {
-    display: flex;
-    flex-direction: column;
+    padding: 0 5px;
+    background-color: var(--input-pretty-background-color);;
 }
