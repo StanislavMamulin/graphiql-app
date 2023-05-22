@@ -9,6 +9,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import FormInput from '../FormInput/FormInput';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { useTranslation } from 'react-i18next';
 
 interface validateFields {
   email: string;
@@ -110,7 +111,7 @@ const LoginForm: FC = () => {
         </div>
         <div className={styles.form_group}>
           <Button
-            title="{t('auth.signin')}"
+            title={t('auth.signin')}
             type="submit"
             clickHandler={() => {
               clearErrors();

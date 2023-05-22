@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { useTranslation } from 'react-i18next';
 
 const SignUpForm: FC = () => {
   const { t } = useTranslation();
