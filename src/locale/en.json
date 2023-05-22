@@ -26,5 +26,8 @@
     "editor": {
         "queryVariables": "Query variables",
         "httpHeaders": "HTTP Headers"
+    },
+    "uiError": {
+        "componentNotLoading": "Component loading error. Try reloading the page."
     }
 }
