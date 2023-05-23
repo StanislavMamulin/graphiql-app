@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from './GraphqlEditor.module.css';
 import RunButton from '../RunButton/RunButton';
-import { initializeMode } from 'monaco-graphql/dist/initializeMode';
 import CustomTexareaEditor from '../CustomTextareaEditor/CustomTexareaEditor';
-
-// const fetcher = createGraphiQLFetcher({
-//     url: 'https://rickandmortyapi.com/graphql',
-// });
+import { useSendRequestQuery } from '../../services/rickAndMortyAPI';
+import { Spinner } from '../Spinner/Spinner';
 
 const initValue = `query{
 characters {
@@ -18,71 +15,58 @@ characters {
 
 export default function GraphqlEditor() {
   const [editorRef, setEditorRef] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
   const [responseCode, setResponseCode] = useState('');
   const [value, setValue] = useState(initValue);
-
-  useEffect(() => {
-    initializeMode({
-      schemas: [
-        {
-          uri: 'https://rickandmortyapi.com/graphql',
-          fileMatch: ['**/*.graphql'],
-        },
-      ],
-    });
-  }, []);
+  const {
+    isFetching,
+    data = [],
+    isError,
+    error,
+  } = useSendRequestQuery({
+    document: value,
+    variables: {},
+  });
 
   const handleEditorDidMount = (editor) => {
-    // // initialize the graphql mode with the schema uri
-    // initializeMode({
-    //   schemas: [
-    //     {
-    //       uri: 'https://rickandmortyapi.com/graphql',
-    //       fileMatch: ['**/*.graphql'],
-    //     },
-    //   ],
-    // });
     setEditorRef(editor);
   };
 
   const handleRequest = async () => {
-    //const query = editorRef.getValue().replace(/\n/g, '');
     const query = editorRef.value.replace(/\n/g, '');
-    const result = await fetch('https://rickandmortyapi.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify({ query }),
-    });
-    const data = await result.json();
-    const code = JSON.stringify(data, null, 1);
-    setResponseCode(code);
+    setValue(query);
   };
 
-  // if (isLoading) return <p>Loading...</p>;
+  useEffect(() => {
+    if (data && !isError) {
+      setResponseCode(JSON.stringify(data, null, 1));
+    } else if (isError) {
+      setResponseCode(error.message);
+    }
+  }, [data, isError, error]);
+
   return (
-    <>
-      <div className={styles.editorWrapper}>
-        <RunButton onClick={handleRequest} />
-        <div className={styles.editor}>
-          <CustomTexareaEditor
-            value={value}
-            editable={true}
-            onMount={handleEditorDidMount}
-            mode={1}
-          />
-        </div>
-        <div className={styles.result}>
-          <CustomTexareaEditor
-            editable={false}
-            value={responseCode || '# response will be shown here...'}
-            mode={0}
-          />
-        </div>
+    <div className={styles.editorWrapper}>
+      <RunButton onClick={handleRequest} />
+      <div className={styles.editor}>
+        <CustomTexareaEditor
+          value={value}
+          editable={true}
+          onMount={handleEditorDidMount}
+          mode={1}
+        />
       </div>
-    </>
+      <div className={`${styles.result} ${isError ? styles.error : ''}`}>
+        <CustomTexareaEditor
+          editable={false}
+          value={responseCode || '# response will be shown here...'}
+          mode={0}
+        />
+      </div>
+      {isFetching && (
+        <div className={styles.spinnerWrapper}>
+          <Spinner />
+        </div>
+      )}
+    </div>
   );
 }
