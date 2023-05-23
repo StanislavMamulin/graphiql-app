@@ -39,9 +39,7 @@ export function Header() {
 
   return (
     <header className={getHeaderClass()}>
-      <NavLink className="" to="/">
-        {t('welcome')}
-      </NavLink>
+      <Button title={t('welcome')} clickHandler={() => navigate('/')} />
       <LangSwitcher small={sticky} />
       <Button
         title={t('auth.signout')}
