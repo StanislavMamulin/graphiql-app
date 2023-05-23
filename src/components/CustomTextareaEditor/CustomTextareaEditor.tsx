@@ -18,7 +18,7 @@ const DEFAULT_VALUE = `query{
    } 
  }`;
 
-const CustomTexareaEditor: FC<Props> = ({
+const CustomTextareaEditor: FC<Props> = ({
   value = DEFAULT_VALUE,
   mode,
   editable = true,
@@ -123,4 +123,4 @@ const CustomTexareaEditor: FC<Props> = ({
   );
 };
 
-export default CustomTexareaEditor;
+export default CustomTextareaEditor;

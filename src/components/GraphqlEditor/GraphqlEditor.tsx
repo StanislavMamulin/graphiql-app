@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './GraphqlEditor.module.css';
 import RunButton from '../RunButton/RunButton';
-import CustomTexareaEditor from '../CustomTextareaEditor/CustomTexareaEditor';
+import CustomTextareaEditor from '../CustomTextareaEditor/CustomTextareaEditor';
 import { useSendRequestQuery } from '../../services/rickAndMortyAPI';
 import { Spinner } from '../Spinner/Spinner';
 
@@ -48,7 +48,7 @@ export default function GraphqlEditor() {
     <div className={styles.editorWrapper}>
       <RunButton onClick={handleRequest} />
       <div className={styles.editor}>
-        <CustomTexareaEditor
+        <CustomTextareaEditor
           value={value}
           editable={true}
           onMount={handleEditorDidMount}
@@ -56,7 +56,7 @@ export default function GraphqlEditor() {
         />
       </div>
       <div className={`${styles.result} ${isError ? styles.error : ''}`}>
-        <CustomTexareaEditor
+        <CustomTextareaEditor
           editable={false}
           value={responseCode || '# response will be shown here...'}
           mode={0}
