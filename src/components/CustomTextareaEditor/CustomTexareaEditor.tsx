@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './CustomTextareaeditor.module.css';
 import { parse } from 'graphql';
 import svgImg from '../../assets/icons/format_code.svg';
@@ -52,16 +52,19 @@ const CustomTexareaEditor: FC<Props> = ({
     if (!mode) return;
     handleValidation();
   };
-  const prettifyCode = (str) => {
+
+  const prettifyCode = useCallback((str) => {
     let prettyCode = '';
     let indentLevel = 0;
     const indent = 2;
-    const simpleStr = str.replace(/\s+/g, ' ');
+    const simpleStr = str.replace(/\s+/g, '');
 
     for (let i = 0; i < simpleStr.length; i++) {
       if (simpleStr[i] === '{') {
         prettyCode += `{\n${' '.repeat(indentLevel + indent)}`;
         indentLevel += indent;
+      } else if (simpleStr[i] === ',') {
+        prettyCode += `,\n${' '.repeat(indentLevel)}`;
       } else if (simpleStr[i] === '}') {
         indentLevel -= indent;
         prettyCode += `\n${' '.repeat(indentLevel + 1)}}`;
@@ -71,7 +74,8 @@ const CustomTexareaEditor: FC<Props> = ({
     }
 
     return prettyCode;
-  };
+  }, []);
+
   const prettify = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     textAreaRef.current.value = prettifyCode(textAreaRef?.current?.value);
@@ -82,10 +86,7 @@ const CustomTexareaEditor: FC<Props> = ({
   }, [onMount]);
 
   useEffect(() => {
-    textAreaRef.current.value = value;
-  }, [value]);
-
-  useEffect(() => {
+    textAreaRef.current.value = prettifyCode(value);
     const lines = value.split('\n').length;
     setTotalLines(lines);
   }, [value]);
@@ -104,6 +105,7 @@ const CustomTexareaEditor: FC<Props> = ({
         </a>
       )}
       <textarea
+        noValidate={true}
         defaultValue={value}
         onChange={handleValidation}
         onSelect={handleSelect}
