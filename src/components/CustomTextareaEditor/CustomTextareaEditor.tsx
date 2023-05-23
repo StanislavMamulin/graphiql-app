@@ -89,7 +89,7 @@ const CustomTextareaEditor: FC<Props> = ({
     textAreaRef.current.value = prettifyCode(value);
     const lines = value.split('\n').length;
     setTotalLines(lines);
-  }, [value]);
+  }, [value, prettifyCode]);
 
   useEffect(() => {
     currentLine > totalLines && setTotalLines(currentLine);
