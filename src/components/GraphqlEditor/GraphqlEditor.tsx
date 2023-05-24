@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './GraphqlEditor.module.css';
 import RunButton from '../RunButton/RunButton';
 import CustomTextareaEditor from '../CustomTextareaEditor/CustomTextareaEditor';
-import { useSendRequestQuery } from '../../services/rickAndMortyAPI';
+import { useLazySendRequestQuery } from '../../services/rickAndMortyAPI';
 import { Spinner } from '../Spinner/Spinner';
 
 const initValue = `query{
@@ -12,61 +12,56 @@ characters {
   }
  }
 }`;
+const EDITOR_PLACEHOLDER = 'type gql query here...';
+const RESULT_PLACEHOLDER = 'response will be shown here...';
 
 export default function GraphqlEditor() {
   const [editorRef, setEditorRef] = useState(null);
   const [responseCode, setResponseCode] = useState('');
-  const [value, setValue] = useState(initValue);
-  const {
-    isFetching,
-    data = [],
-    isError,
-    error,
-  } = useSendRequestQuery({
-    document: value,
-    variables: {},
-  });
+  const [sendRequest, { isFetching, data = {}, isError, error }] = useLazySendRequestQuery();
 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
   };
 
   const handleRequest = async () => {
-    const query = editorRef.value.replace(/\n/g, '');
-    setValue(query);
+    const query = editorRef.value.replace(/\n/g, '') || '';
+    query && sendRequest({ document: query });
   };
 
   useEffect(() => {
-    if (data && !isError) {
-      setResponseCode(JSON.stringify(data, null, 1));
-    } else if (isError) {
-      setResponseCode(error.message);
+    let response = '';
+    if (isError) {
+      response = error.message.split(',"status"')[0];
+    } else if (Object.keys(data).length > 0) {
+      response = JSON.stringify(data, null, 1);
     }
-  }, [data, isError, error]);
+    setResponseCode(response);
+  }, [data, error, isError]);
 
   return (
-    <div className={styles.editorWrapper}>
-      <RunButton onClick={handleRequest} />
-      <div className={styles.editor}>
-        <CustomTextareaEditor
-          value={value}
-          editable={true}
-          onMount={handleEditorDidMount}
-          mode={1}
-        />
-      </div>
-      <div className={`${styles.result} ${isError ? styles.error : ''}`}>
-        <CustomTextareaEditor
-          editable={false}
-          value={responseCode || '# response will be shown here...'}
-          mode={0}
-        />
-      </div>
-      {isFetching && (
-        <div className={styles.spinnerWrapper}>
-          <Spinner />
+    <>
+      <div className={styles.editorWrapper}>
+        <RunButton onClick={handleRequest} />
+        <div className={styles.editor}>
+          <CustomTextareaEditor
+            value={initValue}
+            editable={true}
+            onMount={handleEditorDidMount}
+            placeholder={EDITOR_PLACEHOLDER}
+            mode={1}
+          />
         </div>
-      )}
-    </div>
+        <div className={`${styles.result} ${isError ? styles.error : ''}`}>
+          <CustomTextareaEditor
+            editable={false}
+            value={responseCode}
+            placeholder={RESULT_PLACEHOLDER}
+            mode={0}
+          />
+        </div>
+      </div>
+      {isFetching && <Spinner fullscreen={true} />}
+    </>
   );
 }
