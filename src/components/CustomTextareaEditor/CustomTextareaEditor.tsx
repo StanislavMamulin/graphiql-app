@@ -1,7 +1,8 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './CustomTextareaeditor.module.css';
 import { parse } from 'graphql';
 import svgImg from '../../assets/icons/format_code.svg';
+import { prettifyCode } from '../../utils/prettify';
 
 interface Props {
   value: string;
@@ -48,29 +49,6 @@ const CustomTextareaEditor: FC<Props> = ({
     handleValidation();
   };
 
-  const prettifyCode = useCallback((str) => {
-    let prettyCode = '';
-    let indentLevel = 0;
-    const indent = 2;
-    const simpleStr = str.replace(/\s+/g, ' ');
-
-    for (let i = 0; i < simpleStr.length; i++) {
-      if (simpleStr[i] === '{') {
-        prettyCode += `{\n${' '.repeat(indentLevel + indent)}`;
-        indentLevel += indent;
-      } else if (simpleStr[i] === ',') {
-        prettyCode += `,\n${' '.repeat(indentLevel)}`;
-      } else if (simpleStr[i] === '}') {
-        indentLevel -= indent;
-        prettyCode += `\n${' '.repeat(indentLevel + 1)}}`;
-      } else {
-        prettyCode += simpleStr[i];
-      }
-    }
-
-    return prettyCode;
-  }, []);
-
   const prettify = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     textAreaRef.current.value = prettifyCode(textAreaRef?.current?.value);
@@ -84,7 +62,7 @@ const CustomTextareaEditor: FC<Props> = ({
     textAreaRef.current.value = prettifyCode(value);
     const lines = value.split('\n').length;
     setTotalLines(lines);
-  }, [value, prettifyCode]);
+  }, [value]);
 
   useEffect(() => {
     currentLine > totalLines && setTotalLines(currentLine);

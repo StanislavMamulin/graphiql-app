@@ -17,11 +17,16 @@ const RESULT_PLACEHOLDER = 'response will be shown here...';
 
 export default function GraphqlEditor() {
   const [editorRef, setEditorRef] = useState(null);
+  const [responseRef, setResponseRef] = useState(null);
   const [responseCode, setResponseCode] = useState('');
   const [sendRequest, { isFetching, data = {}, isError, error }] = useLazySendRequestQuery();
 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
+  };
+
+  const handleResponseDidMount = (editor) => {
+    setResponseRef(editor);
   };
 
   const handleRequest = async () => {
@@ -31,13 +36,14 @@ export default function GraphqlEditor() {
 
   useEffect(() => {
     let response = '';
+    if (responseRef) responseRef.value = '';
     if (isError) {
       response = error.message.split(',"status"')[0];
     } else if (Object.keys(data).length > 0) {
       response = JSON.stringify(data, null, 1);
     }
     setResponseCode(response);
-  }, [data, error, isError]);
+  }, [data, error, isError, responseRef]);
 
   return (
     <>
@@ -56,6 +62,7 @@ export default function GraphqlEditor() {
           <CustomTextareaEditor
             editable={false}
             value={responseCode}
+            onMount={handleResponseDidMount}
             placeholder={RESULT_PLACEHOLDER}
             mode={0}
           />
