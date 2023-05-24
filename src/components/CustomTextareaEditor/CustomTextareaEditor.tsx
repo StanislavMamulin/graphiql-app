@@ -8,21 +8,15 @@ interface Props {
   editable?: boolean;
   onMount?: (ref: HTMLTextAreaElement | null) => void;
   mode: 1 | 0; // 1 -  editor, 0 - response
+  placeholder: string;
 }
 
-const DEFAULT_VALUE = `query{
-   characters {
-     results {
-       name 
-     } 
-   } 
- }`;
-
 const CustomTextareaEditor: FC<Props> = ({
-  value = DEFAULT_VALUE,
+  value,
   mode,
   editable = true,
   onMount,
+  placeholder,
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [totalLines, setTotalLines] = useState<number>(0);
@@ -30,9 +24,10 @@ const CustomTextareaEditor: FC<Props> = ({
   const [error, setError] = useState<string>('');
 
   const handleValidation = () => {
-    if (!mode) return;
+    const val = textAreaRef.current?.value.replace(/\n/g, '');
+
+    if (!mode || !val) return;
     try {
-      const val = textAreaRef.current?.value.replace(/\n/g, '');
       parse(val);
       setError('');
     } catch (error) {
@@ -57,7 +52,7 @@ const CustomTextareaEditor: FC<Props> = ({
     let prettyCode = '';
     let indentLevel = 0;
     const indent = 2;
-    const simpleStr = str.replace(/\s+/g, '');
+    const simpleStr = str.replace(/\s+/g, ' ');
 
     for (let i = 0; i < simpleStr.length; i++) {
       if (simpleStr[i] === '{') {
@@ -112,6 +107,7 @@ const CustomTextareaEditor: FC<Props> = ({
         onBlur={handleBlur}
         readOnly={!editable}
         ref={textAreaRef}
+        placeholder={placeholder}
         rows={2}
         cols={50}
       />
