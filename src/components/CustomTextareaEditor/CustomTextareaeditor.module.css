@@ -1,7 +1,7 @@
 :root {
     --input-color: #fff;
-    --input-background: linear-gradient(to bottom, #444, #222);
-    --input-error-color: red;
+    --input-background: #000000;
+    --input-error-color: #CC3300FF;
     --input-inform-color: #a5a5a5;
     --input-inform-active-color: #00dfc4;
     --input-div-padding: .75em;
@@ -49,9 +49,8 @@
 .inputBox .inform {
     display: inline-flex;
     align-items: center;
-    width: 100%;
-    margin: 0;
     padding: 0;
+    background-color: var(--input-pretty-background-color);
 }
 
 .inputBox .error {
@@ -98,5 +97,4 @@
 
 .inputBox textarea ~ div span {
     padding: 0 5px;
-    background-color: var(--input-pretty-background-color);;
 }
