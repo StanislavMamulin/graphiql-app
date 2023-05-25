@@ -5,11 +5,11 @@ import svgImg from '../../assets/icons/format_code.svg';
 import { prettifyCode } from '../../utils/prettify';
 
 interface Props {
-  value: string;
   editable?: boolean;
   onMount?: (ref: HTMLTextAreaElement | null) => void;
   mode: 1 | 0; // 1 -  editor, 0 - response
   placeholder: string;
+  defaultValue?: string;
 }
 
 const CustomTextareaEditor: FC<Props> = ({
@@ -18,35 +18,34 @@ const CustomTextareaEditor: FC<Props> = ({
   editable = true,
   onMount,
   placeholder,
+  defaultValue,
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [totalLines, setTotalLines] = useState<number>(0);
   const [currentLine, setCurrentLine] = useState<number>(0);
   const [error, setError] = useState<string>('');
 
-  const handleValidation = () => {
+  const handleChange = () => {
     const val = textAreaRef.current?.value.replace(/\n/g, '');
-
-    if (!mode || !val) return;
-    try {
-      parse(val);
-      setError('');
-    } catch (error) {
-      const { message, locations } = error;
-      const errorLine = locations[0]?.line || 1;
-      setError(`Line: ${errorLine}: ${message}`);
+    if (!val) {
+      setTotalLines(0);
+      setCurrentLine(0);
+    } else {
+      try {
+        parse(val);
+        setError('');
+      } catch (error) {
+        const { message, locations } = error;
+        const errorLine = locations[0]?.line || 1;
+        setError(`Line: ${errorLine}: ${message}`);
+      }
     }
   };
 
   const handleSelect = () => {
-    const cursor = textAreaRef.current?.selectionStart ?? 0;
+    const cursor = textAreaRef.current?.selectionStart ?? '';
     const currentLine = textAreaRef.current?.value.substr(0, cursor).split('\n').length;
     setCurrentLine(currentLine);
-  };
-
-  const handleBlur = () => {
-    if (!mode) return;
-    handleValidation();
   };
 
   const prettify = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -55,12 +54,13 @@ const CustomTextareaEditor: FC<Props> = ({
   };
 
   useEffect(() => {
+    const lines = textAreaRef.current.value.split('\n').length;
+    setTotalLines(lines);
     onMount && onMount(textAreaRef.current);
   }, [onMount]);
 
   useEffect(() => {
-    textAreaRef.current.value = prettifyCode(value);
-    const lines = value.split('\n').length;
+    const lines = textAreaRef.current.value.split('\n').length;
     setTotalLines(lines);
   }, [value]);
 
@@ -79,20 +79,22 @@ const CustomTextareaEditor: FC<Props> = ({
       )}
       <textarea
         noValidate={true}
-        defaultValue={value}
-        onChange={handleValidation}
+        defaultValue={defaultValue}
+        onChange={handleChange}
         onSelect={handleSelect}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         readOnly={!editable}
         ref={textAreaRef}
         placeholder={placeholder}
         rows={2}
         cols={50}
       />
-      <div className={styles.inform}>
-        <span>{`${currentLine}/${totalLines}`}</span>
-        {error && <span className={styles.error}>{error}</span>}
-      </div>
+      {mode && (
+        <div className={styles.inform}>
+          <span>{`${currentLine}/${totalLines}`}</span>
+          {error && <span className={styles.error}>{error}</span>}
+        </div>
+      )}
     </div>
   );
 };
