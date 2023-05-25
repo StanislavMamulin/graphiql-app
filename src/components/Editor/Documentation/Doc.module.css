@@ -1,4 +1,4 @@
-.documentation {
+.doc {
     margin-left: auto;
     width: 25%;
     position: absolute;
@@ -7,75 +7,57 @@
     border-left: 1px solid black;
 }
 
-.documentation ul li {
+.doc ul li {
     list-style-type: none;
     text-align: left;
     cursor: pointer;
 }
   
-.documentation_showed {
+.doc_showed {
     margin-right: 0;
 }
   
-  .title {
+.title {
     font-size: 1.5rem;
     margin-bottom: 0.9rem;
-  }
+}
   
-  .subtitle {
+.subtitle {
     font-size: 1.2rem;
     margin-bottom: 0.6rem;
-  }
+}
   
-  .type_list {
+.type_list {
     list-style-type: none;
-    /* display: flex; */
     flex-direction: column;
     align-items: flex-start;
-    /* gap: 0.5rem; */
-  }
+}
   
-  .list_item {
+.list_item {
     cursor: pointer;
     transition: all 0.2s ease;
-  }
+}
   
-  .field {
+.field {
     text-align: left;
     margin-bottom: 0.4rem;
-  }
+}
   
-  .field_title {
+.field_title {
     display: inline-block;
     margin-bottom: 0.15rem;
     text-decoration: underline;
-  
     cursor: pointer;
     transition: all 0.2s ease;
-  }
+}
   
-  .field_type {
+.field_type {
     margin-left: 0.3rem;
     padding: 0.1rem;  
     transition: all 0.2s ease;
-  }
+}
   
-  .field_title:hover + .field_type {
+.field_title:hover + .field_type {
     color: blue;
     border: 1px solid blue;
-  }
-  
-  .button_back {
-    position: absolute;
-    right: 1rem;
-    top: 0.3rem;
-  
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .desc {
-    margin-top: 0.6rem;
-    opacity: 0.7;
-    color: black;
-  }
+}

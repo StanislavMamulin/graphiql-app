@@ -1,6 +1,7 @@
 .wrapper {
     margin-top: var(--header-height);
     height: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -11,8 +12,10 @@
   
 .interface {
     padding: 10px;
-    display: flex;
-    flex-direction: row;
+    width: 25%;
+    /* flex-wrap: wrap;
+    flex-direction: column;
+    display: flex; */
 }
   
 .editor_container {
@@ -45,14 +48,14 @@
     height: 100vh;
     gap: 10px;
     z-index: 1;
-  }
+}
 
-  .button_aside {
+.button_aside {
     width: 20px;
     height: 100vh;
     border-radius: 5px;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     cursor: pointer;
-  }  
+}  

@@ -43,11 +43,6 @@ const Documentation = ({ isOpen }: DocProps) => {
   const [selectedType, setSelectedType] = useState<IDocType>();
   const [error, setError] = useState<string>('');
 
-  let docBar = styles.doc;
-  if (isOpen) {
-    docBar += ' ' + styles.doc_showed;
-  }
-
   useEffect(() => {
     async function fetchSchema() {
       try {
@@ -124,6 +119,11 @@ const Documentation = ({ isOpen }: DocProps) => {
     const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
     const type = types.find((type) => type.name === typeName);
     setSelectedType(type);
+  }
+
+  let docBar = styles.doc;
+  if (isOpen) {
+    docBar += ' ' + styles.doc_showed;
   }
 
   return (
