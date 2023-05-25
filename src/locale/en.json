@@ -29,5 +29,8 @@
     },
     "uiError": {
         "componentNotLoading": "Component loading error. Try reloading the page."
+    },
+    "notification": {
+        "clearAll": "Clear all notifications"
     }
 }

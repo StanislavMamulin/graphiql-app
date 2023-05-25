@@ -32,13 +32,13 @@ const notificationsSlice = createSlice({
         state.notifications.splice(notificationIndex, 1);
       }
     },
-    clearNotification(state) {
+    clearNotifications(state) {
       state.notifications = initialState.notifications;
     },
   },
 });
 
-export const { addNotification, removeNotification, clearNotification } =
+export const { addNotification, removeNotification, clearNotifications } =
   notificationsSlice.actions;
 
 export default notificationsSlice.reducer;
