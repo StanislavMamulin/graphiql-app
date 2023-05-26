@@ -8,9 +8,9 @@ import { setUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
-import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 
 const SignUpForm: FC = () => {
   const { t } = useTranslation();

@@ -8,9 +8,9 @@ import { setUser } from '../../redux/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import FormInput from '../FormInput/FormInput';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
-import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 
 interface validateFields {
   email: string;
