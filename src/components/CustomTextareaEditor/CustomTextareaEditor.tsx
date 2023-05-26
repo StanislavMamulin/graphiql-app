@@ -89,12 +89,12 @@ const CustomTextareaEditor: FC<Props> = ({
         rows={2}
         cols={50}
       />
-      {mode && (
+      {mode ? (
         <div className={styles.inform}>
           <span>{`${currentLine}/${totalLines}`}</span>
           {error && <span className={styles.error}>{error}</span>}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
