@@ -7,7 +7,7 @@ type SidebarProps = {
 
 export const Sidebar = ({ docHandler }: SidebarProps) => {
   return (
-    <aside className={styles.settings}>
+    <aside className={styles.sidebar}>
       <Button
         clickHandler={() => {
           docHandler();

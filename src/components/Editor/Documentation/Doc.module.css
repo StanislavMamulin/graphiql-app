@@ -1,10 +1,5 @@
 .doc {
-    margin-left: auto;
-    width: 25%;
-    position: absolute;
-    margin-right: -20%;
-    transition: all 1s ease;
-    border-left: 1px solid black;
+    display: none;
 }
 
 .doc ul li {
@@ -14,7 +9,16 @@
 }
   
 .doc_showed {
-    margin-right: 0;
+    top: 64px;
+    right: 0;
+    width: 25%;
+    height: 80%;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    transition: all 1s ease;
+    border-left: 1px solid black;
+    background-color: white;
 }
   
 .title {

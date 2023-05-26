@@ -17,8 +17,8 @@ const MainPage = () => {
       <div className={styles.wrapper}>
         <GraphqlEditor />
         <TabBlock />
+        <Sidebar docHandler={() => openDoc()} />
         <div className={styles.interface}>
-          <Sidebar docHandler={() => openDoc()} />
           <Suspense fallback={<div>Loading...</div>}>
             <LazyDoc isOpen={isOpen} />
           </Suspense>

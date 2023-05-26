@@ -1,6 +1,26 @@
+.bg {
+    background-color: #202020;
+    background-image: url(https://graphql.org/img/graph-wash.png);
+    display: inline-block;
+    /* display: flex; */
+    /* align-self: center; */
+    /* justify-content: center; */
+    top: 0;
+    right: 0;
+    height: calc(100vh - 200px);
+    width: 100%;
+    background-repeat: repeat;
+}
+
+.bg_btns {
+    float: right;
+    margin-right: 0;
+}
+
 .user_btns {
     display: flex;
-    align-self: center;
+    width: 100%;
+    justify-content: end;
     float: right;
     height: 64px;
 }
@@ -10,4 +30,40 @@
     align-self: center;
     gap: 30px;
     margin-right: 30px;
+}
+
+.welcome_content {
+    color: white;
+    margin-top: 10em;
+}
+
+.welcome_content div {
+    display: flex;
+    justify-content: center;
+}
+
+.welcome_content div p {
+    justify-content: center;
+    width: 36rem;
+    font-size: 32px;
+    text-transform: uppercase;
+    padding: 0 2rem;
+    margin: 0;
+    letter-spacing: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    animation: typing 6s steps(45), blink 0.5s step-end infinite alternate;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
 }
