@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import styles from './GraphqlEditor.module.css';
 import RunButton from '../RunButton/RunButton';
-import { initializeMode } from 'monaco-graphql/dist/initializeMode';
-import CustomTexareaEditor from '../CustomTextareaEditor/CustomTexareaEditor';
-
-// const fetcher = createGraphiQLFetcher({
-//     url: 'https://rickandmortyapi.com/graphql',
-// });
+import CustomTextareaEditor from '../CustomTextareaEditor/CustomTextareaEditor';
+import { useLazySendRequestQuery } from '../../services/rickAndMortyAPI';
+import { Spinner } from '../Spinner/Spinner';
+import { prettifyCode } from '../../utils/prettify';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const initValue = `query{
 characters {
@@ -15,74 +15,61 @@ characters {
   }
  }
 }`;
+const EDITOR_PLACEHOLDER = 'type gql query here...';
+const RESULT_PLACEHOLDER = 'response will be shown here...';
 
 export default function GraphqlEditor() {
   const [editorRef, setEditorRef] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
-  const [responseCode, setResponseCode] = useState('');
-  const [value, setValue] = useState(initValue);
-
-  useEffect(() => {
-    initializeMode({
-      schemas: [
-        {
-          uri: 'https://rickandmortyapi.com/graphql',
-          fileMatch: ['**/*.graphql'],
-        },
-      ],
-    });
-  }, []);
+  const [responseRef, setResponseRef] = useState(null);
+  const [sendRequest, { isFetching, data = {}, isError, error }] = useLazySendRequestQuery();
+  const { variables, headers } = useSelector((state: RootState) => state.requestParameters);
 
   const handleEditorDidMount = (editor) => {
-    // // initialize the graphql mode with the schema uri
-    // initializeMode({
-    //   schemas: [
-    //     {
-    //       uri: 'https://rickandmortyapi.com/graphql',
-    //       fileMatch: ['**/*.graphql'],
-    //     },
-    //   ],
-    // });
     setEditorRef(editor);
   };
 
-  const handleRequest = async () => {
-    //const query = editorRef.getValue().replace(/\n/g, '');
-    const query = editorRef.value.replace(/\n/g, '');
-    const result = await fetch('https://rickandmortyapi.com/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify({ query }),
-    });
-    const data = await result.json();
-    const code = JSON.stringify(data, null, 1);
-    setResponseCode(code);
+  const handleResponseDidMount = (editor) => {
+    setResponseRef(editor);
   };
 
-  // if (isLoading) return <p>Loading...</p>;
+  const handleRequest = async () => {
+    const query = editorRef.value.replace(/\s+/g, '') || '';
+    query && sendRequest({ document: query, variables, headers });
+  };
+
+  useEffect(() => {
+    if (!responseRef || Object.keys(data).length === 0 || error) return;
+    responseRef.value = prettifyCode(JSON.stringify(data, null, 1));
+  }, [data, error, responseRef]);
+
+  useEffect(() => {
+    if (!error) return;
+    responseRef.value = prettifyCode(error.message.split(',"status"')[0]);
+  }, [error, responseRef]);
+
   return (
     <>
       <div className={styles.editorWrapper}>
         <RunButton onClick={handleRequest} />
         <div className={styles.editor}>
-          <CustomTexareaEditor
-            value={value}
+          <CustomTextareaEditor
+            defaultValue={initValue}
             editable={true}
             onMount={handleEditorDidMount}
+            placeholder={EDITOR_PLACEHOLDER}
             mode={1}
           />
         </div>
-        <div className={styles.result}>
-          <CustomTexareaEditor
+        <div className={`${styles.result} ${isError ? styles.error : ''}`}>
+          <CustomTextareaEditor
             editable={false}
-            value={responseCode || '# response will be shown here...'}
+            onMount={handleResponseDidMount}
+            placeholder={RESULT_PLACEHOLDER}
             mode={0}
           />
         </div>
       </div>
+      {isFetching && <Spinner fullscreen={true} />}
     </>
   );
 }

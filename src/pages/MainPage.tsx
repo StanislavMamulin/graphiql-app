@@ -4,6 +4,7 @@ import { LazyDoc } from '../components/Editor/Documentation';
 import { Sidebar } from '../components/Editor/Sidebar';
 import GraphqlEditor from '../components/GraphqlEditor/GraphqlEditor';
 import { TabBlock } from '../components/TabBlock/TabBlock';
+import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 
 const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);

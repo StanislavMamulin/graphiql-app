@@ -9,10 +9,12 @@ import RegisterPage from './pages/RegisterPage';
 import MainPage from './pages/MainPage';
 import { ProtectedLayout } from './router/ProtectedLayout';
 import { NotForLoggedInUser } from './router/NotForLoggedInUser';
+import { SlideNotifications } from './components/SlideNotification/SlideNotifications';
 
 export const App = () => {
   return (
     <BrowserRouter>
+      <SlideNotifications />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route element={<NotForLoggedInUser />}>
