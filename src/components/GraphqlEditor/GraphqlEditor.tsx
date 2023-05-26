@@ -5,6 +5,8 @@ import CustomTextareaEditor from '../CustomTextareaEditor/CustomTextareaEditor';
 import { useLazySendRequestQuery } from '../../services/rickAndMortyAPI';
 import { Spinner } from '../Spinner/Spinner';
 import { prettifyCode } from '../../utils/prettify';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const initValue = `query{
 characters {
@@ -20,7 +22,7 @@ export default function GraphqlEditor() {
   const [editorRef, setEditorRef] = useState(null);
   const [responseRef, setResponseRef] = useState(null);
   const [sendRequest, { isFetching, data = {}, isError, error }] = useLazySendRequestQuery();
-  //const { variables, headers } = useSelector((state: RootState) => state.requestParameters);
+  const { variables, headers } = useSelector((state: RootState) => state.requestParameters);
 
   const handleEditorDidMount = (editor) => {
     setEditorRef(editor);
@@ -32,7 +34,7 @@ export default function GraphqlEditor() {
 
   const handleRequest = async () => {
     const query = editorRef.value.replace(/\s+/g, '') || '';
-    query && sendRequest({ document: query, variables: { myVariable: 'someValue' }, headers: {} });
+    query && sendRequest({ document: query, variables, headers });
   };
 
   useEffect(() => {
