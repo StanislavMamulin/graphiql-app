@@ -8,8 +8,9 @@ import { setUser } from '../../redux/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import FormInput from '../FormInput/FormInput';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 
 interface validateFields {
   email: string;
@@ -65,62 +66,64 @@ const LoginForm: FC = () => {
       )}
     >
       {isSubmitting && <Spinner />}
-      <form
-        className={styles.login_form.concat(' ', errors.form ? styles.hasError : '')}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        {
-          <span role="alert" className={styles.error}>
-            {errors.form?.message}
-          </span>
-        }
-        <h2>Login</h2>
-        <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <FormInput
-            type="text"
-            placeholder="email"
-            name="email"
-            autoComplete="email"
-            register={register}
-            errors={errors.email?.message}
-            rules={{
-              required: c.en.MESSAGES.errors.required,
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: c.en.MESSAGES.errors.emailFormat,
-              },
-            }}
-          />
-        </div>
-        <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
-          <FormInput
-            name="password"
-            placeholder={'Password'}
-            register={register}
-            type="password"
-            autoComplete="current-password"
-            errors={errors.password?.message}
-            rules={{
-              required: c.en.MESSAGES.errors.required,
-              minLength: {
-                value: 8,
-                message: c.en.MESSAGES.errors.minLength,
-              },
-            }}
-          />
-        </div>
-        <div className={styles.form_group}>
-          <Button
-            title={t('auth.signin')}
-            type="submit"
-            clickHandler={() => {
-              clearErrors();
-            }}
-          />
-          or
-          <Link to="/register">{t('auth.signup')}</Link>
-        </div>
-      </form>
+      <ErrorBoundary>
+        <form
+          className={styles.login_form.concat(' ', errors.form ? styles.hasError : '')}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {
+            <span role="alert" className={styles.error}>
+              {errors.form?.message}
+            </span>
+          }
+          <h2>Login</h2>
+          <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
+            <FormInput
+              type="text"
+              placeholder="email"
+              name="email"
+              autoComplete="email"
+              register={register}
+              errors={errors.email?.message}
+              rules={{
+                required: c.en.MESSAGES.errors.required,
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: c.en.MESSAGES.errors.emailFormat,
+                },
+              }}
+            />
+          </div>
+          <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
+            <FormInput
+              name="password"
+              placeholder={'Password'}
+              register={register}
+              type="password"
+              autoComplete="current-password"
+              errors={errors.password?.message}
+              rules={{
+                required: c.en.MESSAGES.errors.required,
+                minLength: {
+                  value: 8,
+                  message: c.en.MESSAGES.errors.minLength,
+                },
+              }}
+            />
+          </div>
+          <div className={styles.form_group}>
+            <Button
+              title={t('auth.signin')}
+              type="submit"
+              clickHandler={() => {
+                clearErrors();
+              }}
+            />
+            or
+            <Link to="/register">{t('auth.signup')}</Link>
+          </div>
+        </form>
+      </ErrorBoundary>
     </div>
   );
 };

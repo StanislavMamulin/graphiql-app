@@ -26,5 +26,11 @@
     "editor": {
         "queryVariables": "Переменные запроса",
         "httpHeaders": "HTTP-заголовки"
+    },
+    "uiError": {
+        "componentNotLoading": "Ошибка загрузки компонента. Попробуйте перезагрузить страницу."
+    },
+    "notification": {
+        "clearAll": "Очистить все уведомления"
     }
 }
