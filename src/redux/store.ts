@@ -5,6 +5,7 @@ import userReducer from './slices/userSlice';
 import requestReducer from './slices/requestParametersSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import { rickAndMortyApi } from '../services/rickAndMortyAPI';
+import { tokenExpirationMiddleware } from './middlewares/tokenExpirationMiddleware';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rickAndMortyApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([rickAndMortyApi.middleware, tokenExpirationMiddleware]),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
