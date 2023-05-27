@@ -1,3 +1,8 @@
+.wrapper {
+    margin: 0 auto;
+    height: calc(100vh - 260px);
+}
+
 .lang_btn {
     position: fixed;
     top: 0;

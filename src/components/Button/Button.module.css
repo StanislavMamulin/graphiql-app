@@ -21,3 +21,14 @@
 .button:active {
   background-color: var(--action-button-pressed); 
 }
+
+@media screen and (max-width: 400px) {
+
+  .button {
+    padding: 5px 10px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+}

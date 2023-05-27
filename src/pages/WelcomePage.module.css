@@ -1,13 +1,12 @@
 .bg {
     background-color: #202020;
     background-image: url(https://graphql.org/img/graph-wash.png);
-    display: inline-block;
-    /* display: flex; */
-    /* align-self: center; */
-    /* justify-content: center; */
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
     top: 0;
     right: 0;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 260px);
     width: 100%;
     background-repeat: repeat;
 }
@@ -34,7 +33,7 @@
 
 .welcome_content {
     color: white;
-    margin-top: 10em;
+    margin-top: 12em;
 }
 
 .welcome_content div {
@@ -56,6 +55,10 @@
     animation: typing 6s steps(45), blink 0.5s step-end infinite alternate;
 }
 
+h1 {
+    font-size: 54px;
+}
+
 @keyframes typing {
     from {
         width: 0
@@ -66,4 +69,68 @@
     50% {
         border-color: transparent
     }
+}
+
+@media screen and (max-width: 600px) {
+
+    .bg {
+        height: calc(100vh - 240px);
+    }
+
+    .user_btns {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        height: 64px;
+    }
+
+    .user_btns_auth {
+        display: flex;
+        align-self: center;
+        gap: 10px;
+        margin-right: 10px;
+    }
+
+    .welcome_content div p {
+        justify-content: center;
+        width: 20rem;
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .bg {
+        height: calc(100vh - 260px);
+    }
+
+    .user_btns {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        height: 64px;
+    }
+
+    .user_btns_auth {
+        display: flex;
+        align-self: center;
+        gap: 10px;
+        margin-right: 10px;
+    }
+
+    .welcome_content div p {
+        justify-content: center;
+        width: 36rem;
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
 }

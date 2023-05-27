@@ -9,7 +9,7 @@ import styles from './Register.module.css';
 const RegisterPage: FC = () => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div className={styles.lang_btn}>
         <LangSwitcher />
       </div>

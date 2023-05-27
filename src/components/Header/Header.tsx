@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { LangSwitcher } from '../LanguageSwitcher/LangSwitcher';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { signOutUser } from '../../services/firebase/auth';
 import { removeUser } from '../../redux/slices/userSlice';
@@ -13,6 +13,7 @@ const STICKY_THRESHOLD_PX = 100;
 
 export function Header() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [sticky, setSticky] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -38,7 +39,7 @@ export function Header() {
 
   return (
     <header className={getHeaderClass()}>
-      <Button title={t('welcome')} clickHandler={() => navigate('/')} />
+      <Button title={t('toHome')} clickHandler={() => navigate('/')} />
       <LangSwitcher small={sticky} />
       <Button
         title={t('auth.signout')}

@@ -9,7 +9,7 @@ import styles from './Login.module.css';
 const LoginPage: FC = () => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div className={styles.lang_btn}>
         <LangSwitcher />
       </div>
