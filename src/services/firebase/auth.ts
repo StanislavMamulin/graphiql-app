@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   User,
   signOut,
+  IdTokenResult,
 } from 'firebase/auth';
 import { firebaseApp } from './firebase';
 
@@ -14,6 +15,16 @@ export const signIn = async (email: string, password: string): Promise<User> => 
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
     return userCredential.user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTokenInfo = async (user: User): Promise<IdTokenResult> => {
+  try {
+    const tokenResult: IdTokenResult = await user.getIdTokenResult();
+
+    return tokenResult;
   } catch (error) {
     throw error;
   }

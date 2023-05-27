@@ -1,16 +1,20 @@
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FirebaseError } from 'firebase/app';
+import { useTranslation } from 'react-i18next';
+
 import * as c from './constants';
 import styles from './LoginForm.module.css';
 import { Button } from '../Button/Button';
 import { setUser } from '../../redux/slices/userSlice';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import FormInput from '../FormInput/FormInput';
 import { Spinner } from '../Spinner/Spinner';
-import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
+import { getTokenInfo, signIn } from '../../services/firebase/auth';
+import { useAddNotification } from '../../hooks/useAddNotifications';
+import { SlideNotificationType } from '../../types/NotificationType';
 
 interface validateFields {
   email: string;
@@ -22,12 +26,12 @@ const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const history = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const sendNotifications = useAddNotification();
 
   const {
     register,
     handleSubmit,
     getValues,
-    setError,
     clearErrors,
     formState: { errors },
   } = useForm({
@@ -35,27 +39,38 @@ const LoginForm: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<validateFields> = () => {
-    const auth = getAuth();
+  const onSubmit: SubmitHandler<validateFields> = async () => {
     const { email, password } = getValues();
     setIsSubmitting(true);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        setIsSubmitting(false);
-        dispatch(
-          setUser({
-            id: user.uid,
-            email: user.email,
-            token: user.refreshToken,
-          })
-        );
-        history('/main');
-      })
-      .catch((e) => {
-        setIsSubmitting(false);
-        setError('form', { type: 'form', message: e.message });
-      });
+    try {
+      const user = await signIn(email, password);
+      const { expirationTime } = await getTokenInfo(user);
+
+      setIsSubmitting(false);
+      dispatch(
+        setUser({
+          id: user.uid,
+          email: user.email,
+          token: user.refreshToken,
+          expDate: expirationTime,
+        })
+      );
+      history('/main');
+    } catch (error) {
+      setIsSubmitting(false);
+
+      if (error instanceof FirebaseError) {
+        sendNotifications({ message: error.message, type: SlideNotificationType.ERROR });
+      } else if (error instanceof Error) {
+        sendNotifications({ message: error.message, type: SlideNotificationType.ERROR });
+      } else {
+        sendNotifications({
+          message: `${t('apiError.somethingWrong')}\nError: ${error}`,
+          type: SlideNotificationType.ERROR,
+        });
+      }
+    }
   };
 
   return (
