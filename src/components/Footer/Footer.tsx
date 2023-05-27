@@ -1,12 +1,14 @@
+import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.css';
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_content}>
-        <h6>About</h6>
-        <p>GraphiQL App is a playground/IDE for graphQL requests</p>
-        <h6>Created by</h6>
+        <h6>{t('footer.about')}</h6>
+        <p>{t('footer.p')}</p>
+        <h6>{t('footer.created')}</h6>
         <div className={styles.author_info}>
           <a href="https://github.com/StanislavMamulin">
             <img

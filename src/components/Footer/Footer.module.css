@@ -72,7 +72,7 @@
 @media screen and (max-width: 600px) {
 
     .footer {
-        height: 220px;
+        height: 240px;
     }
 
     .footer_content {
@@ -90,6 +90,7 @@
 
     .footer_content p {
         margin-top: 1em;
+        font-size: 14px;
     }
 
     .author_img {

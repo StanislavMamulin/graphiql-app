@@ -1,5 +1,11 @@
 {
     "welcome": "WELCOME TO",
+    "toHome": "Go back home",
+    "footer": {
+        "about": "About",
+        "created": "Created by",
+        "p": "GraphiQL App is a playground/IDE для запросов graphQL"
+    },
     "404": {
         "mess1": "Page not found",
         "mess2": "Sorry, we couldn’t find the page you’re looking for.",
