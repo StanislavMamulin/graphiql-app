@@ -1,10 +1,10 @@
-import { useCallback, useRef, useState } from 'react';
-import styles from './LangSwitcher.module.css';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlagImg } from './FlagImg';
 import { LangItem, languageOptions } from './languageOptions';
-import { useTranslation } from 'react-i18next';
+import { DEFAULT_LANG, LANG_LS_KEY } from '../../utils/constants';
 
-const defaultLangFlag = <FlagImg src={languageOptions[0].flagimg} alt={languageOptions[0].name} />;
+import styles from './LangSwitcher.module.css';
 
 type LangSwitcherProps = {
   small?: boolean;
@@ -12,12 +12,19 @@ type LangSwitcherProps = {
 
 export const LangSwitcher = ({ small }: LangSwitcherProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [langFlag, setLangFlag] = useState(defaultLangFlag);
+  const [currentLang, setCurrentLang] = useState<string>(DEFAULT_LANG);
   const menuRef = useRef<HTMLUListElement | null>(null);
   const firstAppear = useRef<boolean>(false);
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem(LANG_LS_KEY);
+    if (storedLang) {
+      setCurrentLang(storedLang);
+    }
+  }, []);
 
   const clickHandler = useCallback((e: MouseEvent) => {
-    console.log(firstAppear.current);
     if (!firstAppear.current && menuRef.current && !menuRef.current.contains(e.target as Node)) {
       setShowDropdown(false);
       window.removeEventListener('click', clickHandler);
@@ -33,12 +40,25 @@ export const LangSwitcher = ({ small }: LangSwitcherProps) => {
       window.addEventListener('click', clickHandler);
     }
   };
-  const { i18n } = useTranslation();
+
+  const getFlag = (): JSX.Element => {
+    const langInfo: LangItem | undefined = languageOptions.find(
+      (lang: LangItem) => lang.id === currentLang
+    );
+
+    if (langInfo) {
+      return <FlagImg src={langInfo.flagimg} alt={langInfo.name} />;
+    }
+
+    return <FlagImg src={languageOptions[0].flagimg} alt={languageOptions[0].name} />;
+  };
 
   const selectListItem = (lang: LangItem) => {
-    setLangFlag(<FlagImg src={lang.flagimg} alt={lang.name} />);
+    setCurrentLang(lang.id);
+
     i18n.changeLanguage(lang.id);
     localStorage.setItem('lng', lang.id);
+
     setShowDropdown(false);
     window.removeEventListener('click', clickHandler);
   };
@@ -48,15 +68,15 @@ export const LangSwitcher = ({ small }: LangSwitcherProps) => {
 
   return (
     <div className={getLangContainerStyle()}>
-      <button onClick={showDropdownHandler} className={styles.lang__button}>
-        {langFlag}
+      <button onClick={showDropdownHandler} className={styles.lang__button} type="button">
+        {getFlag()}
       </button>
       {showDropdown && (
         <ul className={styles.lang__list} ref={menuRef}>
           {languageOptions.map((lang) => (
             <li key={lang.id} className={styles.lang__item} onClick={() => selectListItem(lang)}>
               <FlagImg src={lang.flagimg} alt={lang.name} />
-              {lang.name}
+              <span className={styles.lang__name}>{lang.name}</span>
             </li>
           ))}
         </ul>

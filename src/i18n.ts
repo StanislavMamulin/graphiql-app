@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 
 import en from './locale/en.json';
 import ru from './locale/ru.json';
+import { DEFAULT_LANG, LANG_LS_KEY } from './utils/constants';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -14,7 +15,7 @@ i18n.use(initReactI18next).init({
     },
   },
   // supportedLngs: ['en', 'ru'],
-  lng: localStorage.getItem('lng') || 'en',
+  lng: localStorage.getItem(LANG_LS_KEY) || DEFAULT_LANG,
   fallbackLng: 'en',
   detection: {
     order: ['localStorage'],
