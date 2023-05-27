@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 import styles from '../components/Editor/Editor.module.css';
-import { LazyDoc } from '../components/Editor';
+import { LazyDoc } from '../components/Editor/Documentation';
 import { Sidebar } from '../components/Editor/Sidebar';
 import GraphqlEditor from '../components/GraphqlEditor/GraphqlEditor';
 import { TabBlock } from '../components/TabBlock/TabBlock';
@@ -15,20 +15,20 @@ const MainPage = () => {
 
   return (
     <>
-      <ErrorBoundary>
-        <div className={styles.wrapper}>
+      <div className={styles.wrapper}>
+        <ErrorBoundary>
           <GraphqlEditor />
           <TabBlock />
-        </div>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <div className={styles.interface}>
+        </ErrorBoundary>
+        <ErrorBoundary>
           <Sidebar docHandler={() => openDoc()} />
-          <Suspense fallback={<div>Loading...</div>}>
-            <LazyDoc isOpen={isOpen} />
-          </Suspense>
-        </div>
-      </ErrorBoundary>
+          <div className={styles.interface}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <LazyDoc isOpen={isOpen} />
+            </Suspense>
+          </div>
+        </ErrorBoundary>
+      </div>
     </>
   );
 };

@@ -5,7 +5,6 @@
 }
 
 #root {
-  max-width: 1600px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
@@ -36,43 +35,4 @@ select:focus {
 ::-webkit-scrollbar-thumb {
     background-color: #a5a5a5;
     border-radius: 5px;
-}
-
-.welcome_content {
-    color: white;
-    margin-top: 10em;
-}
-
-.welcome_content div {
-    display: flex;
-    justify-content: center;
-}
-
-.welcome_content div p {
-    width: 36rem;
-    font-size: 32px;
-    text-transform: uppercase;
-    padding: 0 2rem;
-    margin: 0;
-    letter-spacing: 0.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid;
-    animation: typing 6s steps(45), blink 0.5s step-end infinite alternate;
-}
-
-@keyframes typing {
-    from {
-        width: 0
-    }
-}
-
-@keyframes blink {
-    50% {
-        border-color: transparent
-    }
-}
-
-h1 {
-    font-size: 54px;
 }

@@ -30,3 +30,39 @@
 .btn .run:active {
     transform: translateY(4px);
 }
+
+@media screen and (max-width: 1200px) {
+
+    .btn .run {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn .run::before {
+        content: '';
+        border: 18px solid #ffffff;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 0 solid transparent;
+        transform: translateX(3px);
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .btn .run {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn .run::before {
+        content: '';
+        border: 13px solid #ffffff;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 0 solid transparent;
+        transform: translateX(2px);
+    }
+
+}

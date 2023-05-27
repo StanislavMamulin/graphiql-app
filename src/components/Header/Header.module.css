@@ -21,3 +21,14 @@
   background-color: #f8f9f2;
   height: 50px;
 }
+
+@media screen and (max-width: 400px) {
+
+  .header__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px;
+  }
+
+}

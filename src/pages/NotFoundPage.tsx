@@ -12,7 +12,7 @@ export default function NotFound() {
           <h2>{t('404.mess1')}</h2>
           <p>{t('404.mess2')}</p>
           <div>
-            <NavLink to="/">{t('404.route')}</NavLink>
+            <NavLink to="/">{t('toHome')}</NavLink>
           </div>
         </div>
       </main>
