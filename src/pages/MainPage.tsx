@@ -15,20 +15,20 @@ const MainPage = () => {
 
   return (
     <>
-      <ErrorBoundary>
-        <div className={styles.wrapper}>
+      <div className={styles.wrapper}>
+        <ErrorBoundary>
           <GraphqlEditor />
           <TabBlock />
+        </ErrorBoundary>
+        <ErrorBoundary>
           <Sidebar docHandler={() => openDoc()} />
-          <ErrorBoundary>
-            <div className={styles.interface}>
-              <Suspense fallback={<div>Loading...</div>}>
-                <LazyDoc isOpen={isOpen} />
-              </Suspense>
-            </div>
-          </ErrorBoundary>
-        </div>
-      </ErrorBoundary>
+          <div className={styles.interface}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <LazyDoc isOpen={isOpen} />
+            </Suspense>
+          </div>
+        </ErrorBoundary>
+      </div>
     </>
   );
 };
