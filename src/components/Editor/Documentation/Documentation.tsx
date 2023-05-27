@@ -131,7 +131,7 @@ const Documentation = ({ isOpen }: DocProps) => {
       <div>
         {!error ? (
           selectedType ? (
-            <div>
+            <>
               <h3 className={styles.subtitle}>{selectedType.name}</h3>
               {selectedType.description && <p>{selectedType.description}</p>}
               {selectedType.fields?.map((field) => (
@@ -145,7 +145,7 @@ const Documentation = ({ isOpen }: DocProps) => {
                   {field.description && <p>{field.description}</p>}
                 </div>
               ))}
-            </div>
+            </>
           ) : (
             <ul className={styles.type_list}>
               {types.map((type) => (
