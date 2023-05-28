@@ -3,7 +3,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import * as c from './constants';
 import styles from './SignUpForm.module.css';
 import { Button } from '../Button/Button';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { setUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { handleError } from '../../errors/handleErrors';
 import { useAddNotification } from '../../hooks/useAddNotifications';
+import { createUser, getTokenInfo } from 'services/firebase/auth';
 
 const SignUpForm: FC = () => {
   const { t } = useTranslation();
@@ -32,27 +32,30 @@ const SignUpForm: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = () => {
-    const auth = getAuth();
+  const onSubmit: SubmitHandler<FieldValues> = async () => {
     const { email, password } = getValues();
     setIsSubmitting(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        setIsSubmitting(false);
-        dispatch(
-          setUser({
-            id: user.uid,
-            email: user.email,
-            token: user.refreshToken,
-          })
-        );
-        history('/main');
-      })
-      .catch((e) => {
-        setIsSubmitting(false);
-        handleError(e, sendNotifications);
-      });
+    try {
+      const user = await createUser(email, password);
+      const { expirationTime } = await getTokenInfo(user);
+
+      setIsSubmitting(false);
+
+      dispatch(
+        setUser({
+          id: user.uid,
+          email: user.email,
+          token: user.refreshToken,
+          expDate: expirationTime,
+        })
+      );
+
+      history('/main');
+    } catch (error) {
+      setIsSubmitting(false);
+      handleError(error, sendNotifications);
+    }
   };
 
   const passwordValidation = () => {
