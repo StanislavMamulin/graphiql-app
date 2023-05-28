@@ -40,10 +40,10 @@ const WelcomePage = () => {
           </div>
         </div>
         <div className={styles.welcome_content}>
+          <p>{t('welcome')}</p>
           <div>
-            <p>{t('welcome')}</p>
+            <h1>GraphiQL App</h1>
           </div>
-          <h1>GraphiQL App</h1>
         </div>
       </div>
     </>
