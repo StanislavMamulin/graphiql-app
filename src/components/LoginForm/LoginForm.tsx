@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import * as c from './constants';
@@ -14,11 +14,6 @@ import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { getTokenInfo, signIn } from '../../services/firebase/auth';
 import { useAddNotification } from '../../hooks/useAddNotifications';
 import { handleError } from '../../errors/handleErrors';
-
-interface validateFields {
-  email: string;
-  password: string;
-}
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -38,8 +33,8 @@ const LoginForm: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<validateFields> = async () => {
-    const { email, password } = getValues();
+  const onSubmit: SubmitHandler<FieldValues> = async () => {
+    const { email, password }: FieldValues = getValues();
     setIsSubmitting(true);
 
     try {

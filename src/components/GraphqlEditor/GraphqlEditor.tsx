@@ -21,22 +21,21 @@ const EDITOR_PLACEHOLDER = 'type gql query here...';
 const RESULT_PLACEHOLDER = 'response will be shown here...';
 
 export default function GraphqlEditor() {
-  const [editorRef, setEditorRef] = useState(null);
-  const [responseRef, setResponseRef] = useState(null);
+  const [editorRef, setEditorRef] = useState<HTMLTextAreaElement | null>(null);
+  const [responseRef, setResponseRef] = useState<HTMLTextAreaElement | null>(null);
   const [sendRequest, { isFetching, data = {}, isError, error }] = useLazySendRequestQuery();
   const { variables, headers } = useSelector((state: RootState) => state.requestParameters);
 
-  const handleEditorDidMount = (editor) => {
+  const handleEditorDidMount = (editor: HTMLTextAreaElement | null) => {
     setEditorRef(editor);
   };
 
-  const handleResponseDidMount = (editor) => {
+  const handleResponseDidMount = (editor: HTMLTextAreaElement | null) => {
     setResponseRef(editor);
   };
 
   const handleRequest = async () => {
-    const query = editorRef.value.replace(/\s+/g, ' ') || ' ';
-
+    const query = editorRef?.value.replace(/\s+/g, ' ') || ' ';
     query && sendRequest({ document: query, variables, headers });
   };
 
@@ -47,7 +46,9 @@ export default function GraphqlEditor() {
 
   useEffect(() => {
     if (!error) return;
-    responseRef.value = prettifyCode(error.message.split(',"status"')[0]);
+    if (responseRef && error instanceof Error && error.message.includes('status')) {
+      responseRef.value = prettifyCode(error.message.split(',"status"')[0]);
+    }
   }, [error, responseRef]);
 
   return (
