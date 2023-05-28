@@ -27,7 +27,7 @@ const WelcomePage = () => {
                 </>
               ) : (
                 <>
-                  <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />
+                  <Button title={t('toMain')} clickHandler={() => navigate('/main')} />
                   <Button
                     title={t('auth.signout')}
                     clickHandler={async () => {
