@@ -1,6 +1,7 @@
 {
     "welcome": "WELCOME TO",
     "toHome": "Go back home",
+    "toMain": "To the editor page",
     "docs": "DOCS",
     "footer": {
         "about": "About",
@@ -22,11 +23,30 @@
         "account": "Already have an account?",
         "email": "Email",
         "password": "Password",
-        "passValid": "minimum 8 symbols, at least one letter, one digit, one special character",
-        "tokenExpired": "Authentication expired, please login again"
+        "passValid": "at least one letter, one digit, one special character",
+        "fieldRequired": "This field is required",
+        "emailFormat": "Does not match email format",
+        "minLength": "Min length is 8",
+        "noMatchPass": "The passwords do not match",
+        "tokenExpired": "Authentication expired, please login again",
+        "userNotFound": "User not found",
+        "wrongCredential": "Wrong login or password",
+        "emailAlreadyInUse": "Email already in use",
+        "weakPassword": "Weak password",
+        "internalError": "Internal Error",
+        "invalidEmail": "Invalid Email",
+        "tooManyRequests": "Too Many Requests",
+        "userDisabled": "User Disabled",
+        "operationNotAllowed": "Operation Not Allowed",
+        "invalidVerificationCode": "Invalid Verification Code",
+        "invalidVerificationId": "Invalid Verification Id",
+        "credentialAlreadyInUse": "Credential Already In Use",
+        "unknownError": "Unknown error"
     },
     "apiError": {
-        "somethingWrong": "Something goes wrong"
+        "somethingWrong": "Something goes wrong",
+        "signout": "Sign Out error",
+        "firebaseConfig": "Authentication server initialization error"
     },
     "editorErrors": {
         "syntaxError": "Syntax error"

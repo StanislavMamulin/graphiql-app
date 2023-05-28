@@ -5,13 +5,25 @@ import {
   User,
   signOut,
   IdTokenResult,
+  Auth,
 } from 'firebase/auth';
 import { firebaseApp } from './firebase';
+import { AuthInstanceError } from '../../errors/AuthInstanceError';
 
-const auth = getAuth(firebaseApp);
+let auth: Auth | undefined;
+
+try {
+  auth = getAuth(firebaseApp());
+} catch (error) {
+  auth = undefined;
+}
 
 export const signIn = async (email: string, password: string): Promise<User> => {
   try {
+    if (!auth) {
+      throw AuthInstanceError();
+    }
+
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
     return userCredential.user;
@@ -22,6 +34,10 @@ export const signIn = async (email: string, password: string): Promise<User> => 
 
 export const getTokenInfo = async (user: User): Promise<IdTokenResult> => {
   try {
+    if (!auth) {
+      throw AuthInstanceError();
+    }
+
     const tokenResult: IdTokenResult = await user.getIdTokenResult();
 
     return tokenResult;
@@ -32,6 +48,10 @@ export const getTokenInfo = async (user: User): Promise<IdTokenResult> => {
 
 export const createUser = async (email: string, password: string): Promise<User> => {
   try {
+    if (!auth) {
+      throw AuthInstanceError();
+    }
+
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
     return userCredential.user;
@@ -42,6 +62,10 @@ export const createUser = async (email: string, password: string): Promise<User>
 
 export const signOutUser = async (): Promise<void> => {
   try {
+    if (!auth) {
+      throw AuthInstanceError();
+    }
+
     await signOut(auth);
   } catch (error) {
     throw error;

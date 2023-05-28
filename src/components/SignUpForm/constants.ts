@@ -8,6 +8,7 @@ const en = {
       containDigit: 'should contain at list one digit',
       containLetter: 'should contain at list one letter',
       containSpecial: 'should contain a special char',
+      passValid: 'at least one letter, one digit, one special character',
     },
   },
 };

@@ -1,6 +1,13 @@
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import styles from './FormInput.module.css';
-import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import {
+  FieldError,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  RegisterOptions,
+  UseFormRegister,
+} from 'react-hook-form';
 
 type FormFieldsType = 'email' | 'password' | 'cPassword';
 
@@ -9,6 +16,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: FormFieldsType;
   placeholder: string;
   rules?: RegisterOptions;
+  errors?: string | FieldError | Merge<FieldError, FieldErrorsImpl>;
 }
 
 const FormInput: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...rest }) => {
