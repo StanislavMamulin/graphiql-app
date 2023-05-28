@@ -95,7 +95,7 @@ const SignUpForm: FC = () => {
               name="email"
               autoComplete="email"
               register={register}
-              errors={errors.email?.message}
+              errors={errors.email?.message?.toString()}
               rules={{
                 required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 pattern: {
@@ -112,7 +112,7 @@ const SignUpForm: FC = () => {
               register={register}
               type="password"
               autoComplete="current-password"
-              errors={errors.password?.message}
+              errors={errors.password?.message?.toString()}
               rules={{
                 required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 minLength: {
@@ -127,7 +127,7 @@ const SignUpForm: FC = () => {
             <FormInput
               name="cPassword"
               register={register}
-              errors={errors.cPassword?.message}
+              errors={errors.cPassword?.message?.toString()}
               rules={{
                 required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 validate: passwordCompare,

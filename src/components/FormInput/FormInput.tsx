@@ -1,35 +1,30 @@
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import styles from './FormInput.module.css';
-import {
-  FieldError,
-  FieldErrorsImpl,
-  FieldValues,
-  Merge,
-  RegisterOptions,
-  UseFormRegister,
-} from 'react-hook-form';
+import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
 
 type FormFieldsType = 'email' | 'password' | 'cPassword';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  register?: UseFormRegister<FieldValues>;
+  register: UseFormRegister<FieldValues>;
   name: FormFieldsType;
   placeholder: string;
   rules?: RegisterOptions;
-  errors?: string | FieldError | Merge<FieldError, FieldErrorsImpl>;
+  errors?: string;
 }
 
 const FormInput: FC<InputProps> = ({ register, name, placeholder, rules, errors, ...rest }) => {
   const [show, setShow] = useState(true);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const { type } = rest;
 
-  const { ref, ...restRegister } = register && register(name, rules);
+  const { ref, ...restRegister } = register(name, rules);
   const handleViewPassword = () => {
-    inputRef.current.attributes.type.value === 'password'
-      ? (inputRef.current.attributes.type.value = 'text')
-      : (inputRef.current.attributes.type.value = 'password');
+    if (inputRef.current) {
+      inputRef.current.type === 'password'
+        ? (inputRef.current.type = 'text')
+        : (inputRef.current.type = 'password');
+    }
     setShow(!show);
   };
 
