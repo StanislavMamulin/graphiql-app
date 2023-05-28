@@ -65,9 +65,9 @@
 .inputBox input {
     height: 3em;
     padding: .5em;
-    color: #000000;
+    color: #ffffff;
     border-radius: .31em;
-    border: .063em solid #000000;
+    border: .063em solid #ffffff;
     font-size: 1em;
     width: 100%;
 }
@@ -77,20 +77,20 @@
     right: 0.5em;
     width: 2em;
     cursor: pointer;
+    accent-color: #111111;
 }
 
 .inputBox input:focus ~ span {
-    color: #00dfc4;
+    color: #ffffff;
     transform: translate(10px) translateY(-7px);
     font-size: 0.65em;
     padding: 0 10px;
-    background: #1b2d3a;
-    border-left: 1px solid #00dfc4;
-    border-right: 1px solid #00dfc4;
+    background: #111111;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
 }
 
 .hasError input:focus ~ span {
     border-color: red;
     color: red;
 }
-
