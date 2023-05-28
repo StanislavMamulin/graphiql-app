@@ -1,4 +1,4 @@
-export const prettifyCode = (str) => {
+export const prettifyCode = (str: string) => {
   let prettyCode = '';
   let indentLevel = 0;
   let bracketIsOpen = false;
