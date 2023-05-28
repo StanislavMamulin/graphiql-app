@@ -22,10 +22,11 @@
         "account": "Already have an account?",
         "email": "Email",
         "password": "Password",
-        "passValid": "minimum 8 symbols, at least one letter, one digit, one special character"
+        "passValid": "minimum 8 symbols, at least one letter, one digit, one special character",
+        "tokenExpired": "Authentication expired, please login again"
     },
     "apiError": {
-
+        "somethingWrong": "Something goes wrong"
     },
     "editorErrors": {
         "syntaxError": "Syntax error"
