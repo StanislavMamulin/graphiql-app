@@ -2,7 +2,7 @@ import 'sanitize.css';
 import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage/WelcomePage';
-import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { Footer } from './components/Footer/Footer';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';

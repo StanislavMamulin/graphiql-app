@@ -1,4 +1,4 @@
-import { BASE_URL } from '../../services/api';
+import { BASE_URL } from '../../../services/api';
 import {
   getIntrospectionQuery,
   buildClientSchema,
@@ -10,6 +10,7 @@ import {
   GraphQLEnumType,
 } from 'graphql';
 import { useState, useEffect } from 'react';
+
 import styles from './Doc.module.css';
 
 interface IDocField {

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Button } from '../components/Button/Button';
+import { Button } from '../Button/Button';
 import styles from './Editor.module.css';
 
 type SidebarProps = {

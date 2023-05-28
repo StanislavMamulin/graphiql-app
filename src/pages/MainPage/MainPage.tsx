@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
-import { LazyDoc } from '../../DocSection/Documentation';
-import { Sidebar } from '../../DocSection/Sidebar';
+import { LazyDoc } from '../../components/DocSection/Documentation';
+import { Sidebar } from '../../components/DocSection/Sidebar';
 import GraphqlEditor from '../../components/GraphqlEditor/GraphqlEditor';
 import { TabBlock } from '../../components/TabBlock/TabBlock';
 import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
