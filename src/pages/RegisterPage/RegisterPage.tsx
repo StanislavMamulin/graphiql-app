@@ -1,19 +1,19 @@
 import { FC } from 'react';
-import LoginForm from '../components/LoginForm/LoginForm';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { LangSwitcher } from '../components/LanguageSwitcher/LangSwitcher';
+import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
 
-import styles from './Login.module.css';
+import styles from './Register.module.css';
 
-const LoginPage: FC = () => {
+const RegisterPage: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
       <div className={styles.lang_btn}>
         <LangSwitcher />
       </div>
-      <LoginForm />
+      <SignUpForm />
       <div className={styles.nav_home}>
         <NavLink to="/">{t('toHome')}</NavLink>
       </div>
@@ -21,4 +21,4 @@ const LoginPage: FC = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
