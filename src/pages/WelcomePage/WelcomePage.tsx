@@ -1,18 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LangSwitcher } from '../../components/LanguageSwitcher/LangSwitcher';
 import { Button } from '../../components/Button/Button';
-
-import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import { signOutUser } from '../../services/firebase/auth';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import { removeUser } from '../../redux/slices/userSlice';
+import { useSignout } from '../../hooks/useSignout';
 
 import styles from './WelcomePage.module.css';
 
 const WelcomePage = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  const signout = useSignout();
   const { isAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -30,12 +27,11 @@ const WelcomePage = () => {
                 </>
               ) : (
                 <>
-                  <Button title="Go to Main Page" clickHandler={() => navigate('/main')} />
+                  <Button title={t('toMain')} clickHandler={() => navigate('/main')} />
                   <Button
                     title={t('auth.signout')}
                     clickHandler={async () => {
-                      await signOutUser();
-                      dispatch(removeUser());
+                      await signout();
                     }}
                   />
                 </>
@@ -44,10 +40,10 @@ const WelcomePage = () => {
           </div>
         </div>
         <div className={styles.welcome_content}>
+          <p>{t('welcome')}</p>
           <div>
-            <p>{t('welcome')}</p>
+            <h1>GraphiQL App</h1>
           </div>
-          <h1>GraphiQL App</h1>
         </div>
       </div>
     </>

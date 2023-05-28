@@ -36,15 +36,23 @@
     margin-top: 12em;
 }
 
+.welcome_content p {
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .welcome_content div {
     display: flex;
     justify-content: center;
 }
 
-.welcome_content div p {
+.welcome_content div h1 {
     justify-content: center;
-    width: 36rem;
-    font-size: 32px;
+    width: 32rem;
+    font-size: 50px;
     text-transform: uppercase;
     padding: 0 2rem;
     margin: 0;
@@ -53,10 +61,6 @@
     overflow: hidden;
     border-right: 3px solid;
     animation: typing 6s steps(45), blink 0.5s step-end infinite alternate;
-}
-
-h1 {
-    font-size: 54px;
 }
 
 @keyframes typing {
@@ -91,14 +95,14 @@ h1 {
         margin-right: 10px;
     }
 
-    .welcome_content div p {
-        justify-content: center;
-        width: 20rem;
+    .welcome_content p {
         font-size: 20px;
     }
 
-    h1 {
-        font-size: 40px;
+    .welcome_content div h1 {
+        justify-content: center;
+        width: 20rem;
+        font-size: 24px;
     }
 
 }
@@ -123,14 +127,14 @@ h1 {
         margin-right: 10px;
     }
 
-    .welcome_content div p {
-        justify-content: center;
-        width: 36rem;
-        font-size: 20px;
+    .welcome_content p {
+        font-size: 14px;
     }
 
-    h1 {
-        font-size: 40px;
+    .welcome_content div h1 {
+        justify-content: center;
+        width: 18rem;
+        font-size: 20px;
     }
 
 }

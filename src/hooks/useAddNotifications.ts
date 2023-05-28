@@ -7,7 +7,7 @@ type AddNotificationProps = {
   type: SlideNotificationType;
 };
 
-type AddNotification = (props: AddNotificationProps) => void;
+export type AddNotification = (props: AddNotificationProps) => void;
 
 export const useAddNotification = (): AddNotification => {
   const dispatch = useAppDispatch();

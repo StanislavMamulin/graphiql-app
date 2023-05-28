@@ -64,11 +64,7 @@ export function TabBlock(): JSX.Element {
         }
       }
     } catch (err) {
-      if (type === TabsTypes.HEADERS) {
-        setError(type, t('editorErrors.syntaxError'));
-      } else {
-        setError(type, t('editorErrors.syntaxError'));
-      }
+      setError(type, t('editorErrors.syntaxError'));
     }
   };
 

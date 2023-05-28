@@ -12,8 +12,12 @@ type GraphQLBaseQuery = ({ baseUrl }: { baseUrl: string }) => BaseQueryFn<GraphQ
 const graphqlBaseQuery: GraphQLBaseQuery =
   ({ baseUrl }) =>
   async ({ document, variables, headers }) => {
-    const result = await request(baseUrl, document, variables, headers);
-    return { data: result };
+    try {
+      const result = await request(baseUrl, document, variables, headers);
+      return { data: result };
+    } catch (error) {
+      return { error };
+    }
   };
 
 export const rickAndMortyApi = createApi({
