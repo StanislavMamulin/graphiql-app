@@ -1,6 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { persistStore, persistReducer } from 'redux-persist';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from './slices/userSlice';
@@ -12,8 +21,9 @@ import { tokenExpirationMiddleware } from './middlewares/tokenExpirationMiddlewa
 const persistConfig = {
   key: 'graphql',
   storage,
+  version: 1,
   whitelist: ['user', 'requestParameters'],
-  blacklist: ['notifications'],
+  blacklist: ['notifications', rickAndMortyApi.reducerPath],
 };
 
 const rootReducer = combineReducers({
@@ -28,7 +38,11 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([rickAndMortyApi.middleware, tokenExpirationMiddleware]),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat([rickAndMortyApi.middleware, tokenExpirationMiddleware]),
 });
 export const persistor = persistStore(store);
 
