@@ -6,6 +6,9 @@
 
 .editorWrapper {
     display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 85%;
     flex-flow: row wrap;
 }
 

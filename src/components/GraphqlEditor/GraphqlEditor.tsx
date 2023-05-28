@@ -8,12 +8,14 @@ import { prettifyCode } from '../../utils/prettify';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-const initValue = `query{
-characters {
-  results {
-    name
+const initValue = `query AllCharacters($page: Int, $filter: FilterCharacter) {
+  characters(page: $page, filter: $filter) {
+    results {
+      id
+      name
+      status
+    }
   }
- }
 }`;
 const EDITOR_PLACEHOLDER = 'type gql query here...';
 const RESULT_PLACEHOLDER = 'response will be shown here...';
@@ -33,13 +35,14 @@ export default function GraphqlEditor() {
   };
 
   const handleRequest = async () => {
-    const query = editorRef.value.replace(/\s+/g, '') || '';
+    const query = editorRef.value.replace(/\s+/g, ' ') || ' ';
+
     query && sendRequest({ document: query, variables, headers });
   };
 
   useEffect(() => {
     if (!responseRef || Object.keys(data).length === 0 || error) return;
-    responseRef.value = prettifyCode(JSON.stringify(data, null, 1));
+    responseRef.value = JSON.stringify(data, null, 1);
   }, [data, error, responseRef]);
 
   useEffect(() => {

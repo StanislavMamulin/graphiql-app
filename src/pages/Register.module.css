@@ -1,0 +1,21 @@
+.wrapper {
+    margin: 0 auto;
+    height: calc(100vh - 260px);
+}
+
+.lang_btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.nav_home > * {
+    display: block;
+    margin: 40px 0;
+}
+
+.nav_home > *:hover {
+    display: block;
+    margin: 40px 0;
+    color: #159299;
+}

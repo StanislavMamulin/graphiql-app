@@ -84,7 +84,7 @@ const SignUpForm: FC = () => {
               {errors.form?.message}
             </span>
           }
-          <h2>Sign up</h2>
+          <h2>{t('auth.signup')}</h2>
           <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
             <FormInput
               type="text"
@@ -142,7 +142,7 @@ const SignUpForm: FC = () => {
                 clearErrors();
               }}
             />
-            or
+            {t('auth.or')}
             <Link to="/login">{t('auth.signin')}</Link>
           </div>
         </form>
