@@ -41,8 +41,9 @@ type DocProps = {
 const Documentation = ({ isOpen }: DocProps) => {
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [types, setTypes] = useState<IDocType[]>([]);
-  const [selectedType, setSelectedType] = useState<IDocType>();
+  const [selectedType, setSelectedType] = useState<IDocType | null>(null);
   const [error, setError] = useState<string>('');
+  const [history, setHistory] = useState<IDocType[]>([]);
 
   useEffect(() => {
     async function fetchSchema() {
@@ -65,6 +66,18 @@ const Documentation = ({ isOpen }: DocProps) => {
     }
     isOpen ? fetchSchema() : null;
   }, [isOpen]);
+
+  useEffect(() => {
+    if (history.length === 0) {
+      setSelectedType(null);
+    } else {
+      setSelectedType(history[history.length - 1]);
+    }
+  }, [history]);
+
+  function handleSelectType(type: IDocType) {
+    setHistory([...history, type]);
+  }
 
   useEffect(() => {
     if (schema) {
@@ -111,15 +124,20 @@ const Documentation = ({ isOpen }: DocProps) => {
     }
   }, [schema]);
 
-  function handleSelectType(type: IDocType) {
-    setSelectedType(type);
-  }
+  // function handleSelectType(type: IDocType) {
+  //   setSelectedType(type);
+  // }
 
   function handleSelectField(name: string) {
     const regExp = /\[(.*?)\]/;
     const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
     const type = types.find((type) => type.name === typeName);
-    setSelectedType(type);
+    // setSelectedType(type);
+    type ? setHistory([...history, type]) : '';
+  }
+
+  function historyRoute() {
+    setHistory(history.slice(0, -1));
   }
 
   let docBar = styles.doc;
@@ -133,6 +151,9 @@ const Documentation = ({ isOpen }: DocProps) => {
         {!error ? (
           selectedType ? (
             <>
+              <span className={styles.button} onClick={() => historyRoute()}>
+                back
+              </span>
               <h3 className={styles.subtitle}>{selectedType.name}</h3>
               {selectedType.description && <p>{selectedType.description}</p>}
               {selectedType.fields?.map((field) => (

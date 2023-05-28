@@ -72,7 +72,7 @@
     .doc_showed {
         top: 50px;
         right: 0;
-        width: 30%;
+        width: 40%;
         height: calc(100vh - 180px);
         display: flex;
         justify-content: flex-start;
@@ -81,6 +81,7 @@
         border-left: 1px solid black;
         background-color: white;
         overflow-y: auto;
+        padding-left: 2px;
     }
 
 }
@@ -99,8 +100,17 @@
         border-left: 1px solid black;
         background-color: white;
         overflow-y: auto;
-        padding-left: 1%;
+        padding-left: 4px;
         z-index: 3;
+    }
+
+    .doc ul {
+        padding: 0;
+    }
+
+    .doc ul li h4 {
+        font-size: 14px;
+        font-weight: 700;
     }
 
 }
@@ -127,10 +137,8 @@
     }
 
     .doc ul li h4 {
-        gap: 1;
         font-size: 14px;
         font-weight: 500;
-        /* margin: 0; */
     }
 
 }
