@@ -18,8 +18,10 @@ const MainPage = () => {
     <>
       <div className={styles.wrapper}>
         <ErrorBoundary>
-          <GraphqlEditor />
-          <TabBlock />
+          <div className={styles.editors}>
+            <GraphqlEditor />
+            <TabBlock />
+          </div>
         </ErrorBoundary>
         <ErrorBoundary>
           <Sidebar docHandler={() => openDoc()} />

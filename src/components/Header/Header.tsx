@@ -7,7 +7,7 @@ import { useSignout } from '../../hooks/useSignout';
 
 import styles from './Header.module.css';
 
-const STICKY_THRESHOLD_PX = 100;
+const STICKY_THRESHOLD_PX = 50;
 
 export function Header() {
   const { t } = useTranslation();

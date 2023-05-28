@@ -13,3 +13,14 @@
 .doc_section {
     align-self: flex-end;
 }
+
+.editors {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+  
+    margin-bottom: 16px;
+  }
