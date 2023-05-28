@@ -15,6 +15,11 @@
   --dark-green: #062315;
   --lightest-green: #F2FAF4;
   --middle-green: #95D4A6;
+  --red: red;
+  --white: #ffffff;
+  --black: #000000;
+  --gray: #a5a5a5;
+
 
   /* components colors */
   --main-color: var(--salem);
