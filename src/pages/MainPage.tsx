@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import styles from '../components/Editor/Editor.module.css';
+import styles from './MainPage.module.css';
 import { LazyDoc } from '../components/Editor/Documentation';
 import { Sidebar } from '../components/Editor/Sidebar';
 import GraphqlEditor from '../components/GraphqlEditor/GraphqlEditor';
@@ -17,8 +17,10 @@ const MainPage = () => {
     <>
       <div className={styles.wrapper}>
         <ErrorBoundary>
-          <GraphqlEditor />
-          <TabBlock />
+          <div className={styles.editors}>
+            <GraphqlEditor />
+            <TabBlock />
+          </div>
         </ErrorBoundary>
         <ErrorBoundary>
           <Sidebar docHandler={() => openDoc()} />

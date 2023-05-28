@@ -1,0 +1,27 @@
+.wrapper {
+  margin-top: var(--header-height);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 10px;
+  flex-grow: 1;
+}
+
+.interface {
+  align-self: flex-end;
+}
+
+.editors {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
+}
