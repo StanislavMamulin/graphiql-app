@@ -11,18 +11,20 @@ import FormInput from '../FormInput/FormInput';
 import { Spinner } from '../Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
+import { handleError } from '../../errors/handleErrors';
+import { useAddNotification } from '../../hooks/useAddNotifications';
 
 const SignUpForm: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const history = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const sendNotifications = useAddNotification();
 
   const {
     register,
     handleSubmit,
     getValues,
-    setError,
     clearErrors,
     formState: { errors },
   } = useForm({
@@ -49,21 +51,24 @@ const SignUpForm: FC = () => {
       })
       .catch((e) => {
         setIsSubmitting(false);
-        setError('form', { type: 'form', message: e.message });
+        handleError(e, sendNotifications);
       });
   };
 
   const passwordValidation = () => {
     const { password } = getValues();
-    if (!/[a-zA-Z]/.test(password)) return c.en.MESSAGES.errors.containLetter;
-    if (!/\d/.test(password)) return c.en.MESSAGES.errors.containDigit;
-    if (!/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(password))
-      return c.en.MESSAGES.errors.containSpecial;
+
+    if (
+      !/[a-zA-Z]/.test(password) ||
+      !/\d/.test(password) ||
+      !/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(password)
+    )
+      return t('auth.passValid') || c.en.MESSAGES.errors.passValid;
   };
 
   const passwordCompare = () => {
     const { password, cPassword } = getValues();
-    return cPassword === password || c.en.MESSAGES.errors.noMatchPass;
+    return cPassword === password || t('auth.noMatchPass') || c.en.MESSAGES.errors.noMatchPass;
   };
 
   return (
@@ -79,11 +84,6 @@ const SignUpForm: FC = () => {
           className={styles.signup_form.concat(' ', errors.form ? styles.hasError : '')}
           onSubmit={handleSubmit(onSubmit)}
         >
-          {
-            <span role="alert" className={styles.error}>
-              {errors.form?.message}
-            </span>
-          }
           <h2>{t('auth.signup')}</h2>
           <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
             <FormInput
@@ -94,10 +94,10 @@ const SignUpForm: FC = () => {
               register={register}
               errors={errors.email?.message}
               rules={{
-                required: c.en.MESSAGES.errors.required,
+                required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: c.en.MESSAGES.errors.emailFormat,
+                  message: t('auth.emailFormat') || c.en.MESSAGES.errors.emailFormat,
                 },
               }}
             />
@@ -111,10 +111,10 @@ const SignUpForm: FC = () => {
               autoComplete="current-password"
               errors={errors.password?.message}
               rules={{
-                required: c.en.MESSAGES.errors.required,
+                required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 minLength: {
                   value: 8,
-                  message: c.en.MESSAGES.errors.minLength,
+                  message: t('auth.minLength') || c.en.MESSAGES.errors.minLength,
                 },
                 validate: passwordValidation,
               }}
@@ -126,7 +126,7 @@ const SignUpForm: FC = () => {
               register={register}
               errors={errors.cPassword?.message}
               rules={{
-                required: c.en.MESSAGES.errors.required,
+                required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 validate: passwordCompare,
               }}
               type="password"

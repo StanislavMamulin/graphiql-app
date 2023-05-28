@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FirebaseError } from 'firebase/app';
 import { useTranslation } from 'react-i18next';
 
 import * as c from './constants';
@@ -14,7 +13,7 @@ import { Spinner } from '../Spinner/Spinner';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { getTokenInfo, signIn } from '../../services/firebase/auth';
 import { useAddNotification } from '../../hooks/useAddNotifications';
-import { SlideNotificationType } from '../../types/NotificationType';
+import { handleError } from '../../errors/handleErrors';
 
 interface validateFields {
   email: string;
@@ -60,16 +59,7 @@ const LoginForm: FC = () => {
     } catch (error) {
       setIsSubmitting(false);
 
-      if (error instanceof FirebaseError) {
-        sendNotifications({ message: error.message, type: SlideNotificationType.ERROR });
-      } else if (error instanceof Error) {
-        sendNotifications({ message: error.message, type: SlideNotificationType.ERROR });
-      } else {
-        sendNotifications({
-          message: `${t('apiError.somethingWrong')}\nError: ${error}`,
-          type: SlideNotificationType.ERROR,
-        });
-      }
+      handleError(error, sendNotifications);
     }
   };
 
@@ -86,11 +76,6 @@ const LoginForm: FC = () => {
           className={styles.login_form.concat(' ', errors.form ? styles.hasError : '')}
           onSubmit={handleSubmit(onSubmit)}
         >
-          {
-            <span role="alert" className={styles.error}>
-              {errors.form?.message}
-            </span>
-          }
           <h2>{t('auth.signin')}</h2>
           <div className={styles.form_group.concat(' ', errors.email ? styles.hasError : '')}>
             <FormInput
@@ -101,10 +86,10 @@ const LoginForm: FC = () => {
               register={register}
               errors={errors.email?.message}
               rules={{
-                required: c.en.MESSAGES.errors.required,
+                required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: c.en.MESSAGES.errors.emailFormat,
+                  message: t('auth.emailFormat') || c.en.MESSAGES.errors.emailFormat,
                 },
               }}
             />
@@ -118,10 +103,10 @@ const LoginForm: FC = () => {
               autoComplete="current-password"
               errors={errors.password?.message}
               rules={{
-                required: c.en.MESSAGES.errors.required,
+                required: t('auth.fieldRequired') || c.en.MESSAGES.errors.required,
                 minLength: {
                   value: 8,
-                  message: c.en.MESSAGES.errors.minLength,
+                  message: t('auth.minLength') || c.en.MESSAGES.errors.minLength,
                 },
               }}
             />
