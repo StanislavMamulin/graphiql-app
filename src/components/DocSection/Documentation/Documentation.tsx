@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from 'react';
 
 import styles from './Doc.module.css';
+import { BiArrowBack } from 'react-icons/bi';
 
 interface IDocField {
   [index: string]:
@@ -124,21 +125,17 @@ const Documentation = ({ isOpen }: DocProps) => {
     }
   }, [schema]);
 
-  // function handleSelectType(type: IDocType) {
-  //   setSelectedType(type);
-  // }
-
   function handleSelectField(name: string) {
     const regExp = /\[(.*?)\]/;
     const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
     const type = types.find((type) => type.name === typeName);
-    // setSelectedType(type);
+
     type ? setHistory([...history, type]) : '';
   }
 
-  function historyRoute() {
+  const historyRoute = () => {
     setHistory(history.slice(0, -1));
-  }
+  };
 
   let docBar = styles.doc;
   if (isOpen) {
@@ -151,9 +148,7 @@ const Documentation = ({ isOpen }: DocProps) => {
         {!error ? (
           selectedType ? (
             <>
-              <span className={styles.button} onClick={() => historyRoute()}>
-                back
-              </span>
+              <BiArrowBack className={styles.histoty_btn} onClick={() => historyRoute()} />
               <h3 className={styles.subtitle}>{selectedType.name}</h3>
               {selectedType.description && <p>{selectedType.description}</p>}
               {selectedType.fields?.map((field) => (
