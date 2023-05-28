@@ -22,4 +22,6 @@ const authErrors: AuthFBErrors = {
   default: () => t('auth.unknownError'),
 };
 
+export const FIREBASE_FALLBACK_ERRORTEXT = 'Authentication server initialization error';
+
 export const getFBErrorMessage = (code: string) => authErrors[code]() || authErrors.default();

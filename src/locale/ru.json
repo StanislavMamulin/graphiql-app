@@ -44,7 +44,8 @@
     },
     "apiError": {
         "somethingWrong": "Что-то пошло не так",
-        "signout": "Ошибка выхода"
+        "signout": "Ошибка выхода",
+        "firebaseConfig": "Ошибка инициализации сервера аутентификации"
     },
     "editorErrors": {
         "syntaxError": "Синтаксическая ошибка"

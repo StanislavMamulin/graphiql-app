@@ -9,4 +9,10 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = () => {
+  try {
+    return initializeApp(firebaseConfig);
+  } catch (error) {
+    throw error;
+  }
+};
