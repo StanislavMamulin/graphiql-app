@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import { handleError } from '../../errors/handleErrors';
 import { useAddNotification } from '../../hooks/useAddNotifications';
-import { createUser, getTokenInfo } from 'services/firebase/auth';
+import { createUser, getTokenInfo } from '../../services/firebase/auth';
 
 const SignUpForm: FC = () => {
   const { t } = useTranslation();
