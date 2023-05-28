@@ -3,9 +3,7 @@ import { Button } from '../Button/Button';
 import { LangSwitcher } from '../LanguageSwitcher/LangSwitcher';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { signOutUser } from '../../services/firebase/auth';
-import { removeUser } from '../../redux/slices/userSlice';
-import { useAppDispatch } from '../../hooks/reduxHooks';
+import { useSignout } from '../../hooks/useSignout';
 
 import styles from './Header.module.css';
 
@@ -15,7 +13,7 @@ export function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [sticky, setSticky] = useState(false);
-  const dispatch = useAppDispatch();
+  const signout = useSignout();
 
   useEffect(() => {
     const isSticky = () => {
@@ -43,9 +41,8 @@ export function Header() {
       <LangSwitcher small={sticky} />
       <Button
         title={t('auth.signout')}
-        clickHandler={async () => {
-          await signOutUser();
-          dispatch(removeUser());
+        clickHandler={() => {
+          signout();
         }}
       />
     </header>

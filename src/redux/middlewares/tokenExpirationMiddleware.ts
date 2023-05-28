@@ -4,10 +4,9 @@ import { t } from 'i18next';
 import { checkTokenExpDate } from '../../utils/checkTokenDate';
 import { setHeaders, setVariables } from '../slices/requestParametersSlice';
 import { rickAndMortyApi } from '../../services/rickAndMortyAPI';
-import { signOutUser } from '../../services/firebase/auth';
-import { removeUser } from '../slices/userSlice';
 import { addNotification } from '../slices/notificationsSlice';
 import { SlideNotificationType } from '../../types/NotificationType';
+import { useSignout } from '../../hooks/useSignout';
 
 export const tokenExpirationMiddleware: Middleware =
   ({ dispatch, getState }) =>
@@ -22,10 +21,10 @@ export const tokenExpirationMiddleware: Middleware =
     }
 
     const { token, expDate } = getState().user;
+    const signout = useSignout();
 
     if (token && expDate && checkTokenExpDate(expDate)) {
-      signOutUser();
-      dispatch(removeUser());
+      signout();
       dispatch(
         addNotification({
           message: t('auth.tokenExpired'),
