@@ -15,9 +15,13 @@
 
 .nav_home > * {
     display: block;
-    margin: 40px 0;
+    margin: 0 0 40px 0;
 }
 
 .nav_home > *:hover {
     color: #159299;
+}
+
+.nav_home .nav_ico {
+    margin: 5px;
 }
