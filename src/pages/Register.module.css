@@ -1,6 +1,11 @@
 .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     margin: 0 auto;
     height: calc(100vh - 260px);
+    background: #252525;
 }
 
 .lang_btn {
