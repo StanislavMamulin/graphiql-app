@@ -43,7 +43,8 @@
         "unknownError": "Unknown error"
     },
     "apiError": {
-        "somethingWrong": "Something goes wrong"
+        "somethingWrong": "Something goes wrong",
+        "signout": "Sign Out error"
     },
     "editorErrors": {
         "syntaxError": "Syntax error"

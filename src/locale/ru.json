@@ -43,7 +43,8 @@
         "unknownError": "Неизвестная ошибка"
     },
     "apiError": {
-        "somethingWrong": "Что-то пошло не так"
+        "somethingWrong": "Что-то пошло не так",
+        "signout": "Ошибка выхода"
     },
     "editorErrors": {
         "syntaxError": "Синтаксическая ошибка"
