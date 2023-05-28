@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './CustomTextareaeditor.module.css';
-import { parse } from 'graphql';
+import { GraphQLError, parse } from 'graphql';
 import svgImg from '../../assets/icons/format_code.svg';
 import { prettifyCode } from '../../utils/prettify';
 
@@ -36,9 +36,14 @@ const CustomTextareaEditor: FC<Props> = ({
         parse(val);
         setError('');
       } catch (error) {
-        const { message, locations } = error;
-        const errorLine = locations[0]?.line || 1;
-        setError(`Line: ${errorLine}: ${message}`);
+        console.log(error);
+        if (error instanceof GraphQLError) {
+          const { message, locations } = error;
+          if (locations) {
+            const errorLine = locations[0]?.line || 1;
+            setError(`Line: ${errorLine}: ${message}`);
+          }
+        }
       }
     }
   };
@@ -81,7 +86,6 @@ const CustomTextareaEditor: FC<Props> = ({
         </a>
       )}
       <textarea
-        // noValidate={true}
         defaultValue={defaultValue}
         onChange={handleChange}
         onSelect={handleSelect}
