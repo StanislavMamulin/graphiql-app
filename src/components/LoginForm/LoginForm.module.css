@@ -14,7 +14,7 @@
     border-radius: 8px;
     display: flex;
     justify-content: center;
-    margin: 0 auto;
+    margin: 60px auto;
     overflow: hidden;
     color: var(--white);
 }
