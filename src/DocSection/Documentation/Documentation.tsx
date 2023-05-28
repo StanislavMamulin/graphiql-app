@@ -1,4 +1,4 @@
-import { BASE_URL } from '../../../services/api';
+import { BASE_URL } from '../../services/api';
 import {
   getIntrospectionQuery,
   buildClientSchema,

@@ -1,12 +1,12 @@
 import 'sanitize.css';
 import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import WelcomePage from './pages/WelcomePage';
+import WelcomePage from './pages/WelcomePage/WelcomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import { Footer } from './components/Footer/Footer';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import MainPage from './pages/MainPage/MainPage';
 import { ProtectedLayout } from './router/ProtectedLayout';
 import { NotForLoggedInUser } from './router/NotForLoggedInUser';
 import { SlideNotifications } from './components/SlideNotification/SlideNotifications';
