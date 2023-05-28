@@ -150,7 +150,9 @@ const Documentation = ({ isOpen }: DocProps) => {
             <>
               <BiArrowBack className={styles.histoty_btn} onClick={() => historyRoute()} />
               <h3 className={styles.subtitle}>{selectedType.name}</h3>
-              {selectedType.description && <p>{selectedType.description}</p>}
+              {selectedType.description && (
+                <p className={styles.description}>{selectedType.description}</p>
+              )}
               {selectedType.fields?.map((field) => (
                 <div
                   className={styles.field}
