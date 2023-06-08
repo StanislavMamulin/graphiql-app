@@ -1,0 +1,34 @@
+.header__container {
+  background-color: #EEEFDE;
+  height: var(--header-height);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 24px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 7;
+
+  transition: height var(--animation-duration), background-color var(--animation-duration);
+}
+
+.header__container_sticky {
+  background-color: #f8f9f2;
+  height: 50px;
+}
+
+@media screen and (max-width: 400px) {
+
+  .header__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px;
+  }
+
+}

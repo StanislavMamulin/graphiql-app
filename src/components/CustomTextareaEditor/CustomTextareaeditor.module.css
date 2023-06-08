@@ -1,0 +1,106 @@
+:root {
+    --input-color: #fff;
+    --input-background: #000000;
+    --input-error-color: #CC3300FF;
+    --input-inform-color: #a5a5a5;
+    --input-inform-active-color: #00dfc4;
+    --input-div-padding: .75em;
+    --font-size: 1em;
+    --input-pretty-font-size: 0.65em;
+    --input-pretty-background-color: #efefef;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.inputBox textarea {
+    resize: none;
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    margin: 0;
+    background: var(--input-background);
+    color: var(--input-color);
+    font-size: var(--font-size);
+    border: 1px solid;
+}
+
+.inputBox.hasError {
+    padding-bottom: 0;
+}
+
+.inputBox div {
+    display: inline-flex;
+    justify-content: flex-start;
+    position: absolute;
+    left: 0;
+    padding: var(--input-div-padding);
+    pointer-events: none;
+    font-size: var(--font-size);
+    transition: .5s;
+    color: var(--input-inform-color);
+}
+
+.inputBox .inform {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    background-color: var(--input-pretty-background-color);
+}
+
+.inputBox .error {
+    color: var(--input-error-color);
+}
+
+.inputBox .pretty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-left: auto;
+    right: 2px;
+    padding: 0 2px;
+    top: 2px;
+    height: 30px;
+    width: 30px;
+    font-size: 0.65em;
+    cursor: pointer;
+}
+
+.inputBox .pretty img {
+    width: 100%;
+}
+
+.inputBox .pretty::before {
+    content: '';
+    position: absolute;
+    transform: translateX(1px);
+}
+
+.inputBox .pretty:active {
+    transform: translateY(1px);
+}
+
+.inputBox textarea ~ div {
+    color: var(--input-inform-active-color);
+    transform: translate(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    border-left: 1px solid var(--input-inform-active-color);
+    border-right: 1px solid var(--input-inform-active-color);
+}
+
+.inputBox textarea ~ div span {
+    padding: 0 5px;
+}
+
+@media screen and (max-width: 1000px) {
+    .inputBox textarea {
+        height: 395px;
+    }
+}

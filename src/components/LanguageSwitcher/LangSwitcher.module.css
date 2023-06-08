@@ -1,0 +1,53 @@
+.lang__container {
+  margin: 11px;
+  align-self: flex-start;
+  width: 100px;
+  cursor: pointer;
+  transition: margin var(--animation-duration);
+
+  position: relative;
+  z-index: 999;
+}
+
+.lang__container_small {
+  margin-top: 3px;
+}
+
+.lang__button {
+  border: 1px solid var(--main-color);
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.lang__button:hover {
+  background-color: var(--lightest-main-color);
+}
+
+.lang__button:active {
+  background-color: var(--middle-main-color);
+}
+
+.lang__item {
+  list-style: none;
+}
+
+.lang__flag {
+  object-fit: contain;
+}
+
+.lang__name {
+  font-weight: bold;
+}
+
+.lang__list {
+  padding: 8px;
+  margin: 0;
+  margin-top: 8px;
+
+  background-color: whitesmoke;
+  border: 1px var(--main-color) solid;
+  border-radius: 5px;
+
+  box-shadow: 2px 2px 5px gray;
+}

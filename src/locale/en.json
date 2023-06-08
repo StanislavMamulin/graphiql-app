@@ -1,0 +1,64 @@
+{
+    "welcome": "WELCOME TO",
+    "toHome": "Go back home",
+    "toMain": "To the editor page",
+    "docs": "DOCS",
+    "footer": {
+        "about": "About",
+        "created": "Created by",
+        "p": "GraphiQL App is a playground/IDE для запросов graphQL"
+    },
+    "404": {
+        "mess1": "Page not found",
+        "mess2": "Sorry, we couldn’t find the page you’re looking for.",
+        "route": "Go back home"
+    },
+    "auth": {
+        "or": "or",
+        "login": "Login",
+        "register": "Register",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "signout": "Sign Out",
+        "account": "Already have an account?",
+        "email": "Email",
+        "password": "Password",
+        "passValid": "at least one letter, one digit, one special character",
+        "fieldRequired": "This field is required",
+        "emailFormat": "Does not match email format",
+        "minLength": "Min length is 8",
+        "noMatchPass": "The passwords do not match",
+        "tokenExpired": "Authentication expired, please login again",
+        "userNotFound": "User not found",
+        "wrongCredential": "Wrong login or password",
+        "emailAlreadyInUse": "Email already in use",
+        "weakPassword": "Weak password",
+        "internalError": "Internal Error",
+        "invalidEmail": "Invalid Email",
+        "tooManyRequests": "Too Many Requests",
+        "userDisabled": "User Disabled",
+        "operationNotAllowed": "Operation Not Allowed",
+        "invalidVerificationCode": "Invalid Verification Code",
+        "invalidVerificationId": "Invalid Verification Id",
+        "credentialAlreadyInUse": "Credential Already In Use",
+        "unknownError": "Unknown error"
+    },
+    "apiError": {
+        "somethingWrong": "Something goes wrong",
+        "signout": "Sign Out error",
+        "firebaseConfig": "Authentication server initialization error"
+    },
+    "editorErrors": {
+        "syntaxError": "Syntax error"
+    },
+    "editor": {
+        "queryVariables": "Query variables",
+        "httpHeaders": "HTTP Headers"
+    },
+    "uiError": {
+        "componentNotLoading": "Component loading error. Try reloading the page."
+    },
+    "notification": {
+        "clearAll": "Clear all notifications"
+    }
+}

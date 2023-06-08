@@ -1,0 +1,126 @@
+.form_wrapper {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin: 60px auto 10px;
+    overflow: hidden;
+    color: var(--white);
+}
+
+.form_wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 320px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, var(--salem), var(--salem), var(--salem));
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+.form_wrapper.hasError::before {
+    background: linear-gradient(0deg, transparent, transparent, var(--red), var(--red), var(--red));
+}
+
+.form_wrapper form {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    inset: 2px;
+    z-index: 2;
+    background: #111111;
+    margin: 0 auto;
+    padding: .5em 1em;
+    border-radius: 6px;
+    overflow: hidden;
+    color: var(--white);
+}
+
+.form_wrapper form h2 {
+    color: var(--white);
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: .1em;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.inputBox {
+    position: relative;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: .75em;
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+    color: var(--gray);
+}
+
+.login_form input {
+    height: 3em;
+    padding: .5em;
+    color: var(--white);
+    border-radius: .31em;
+    border: .063em solid var(--black);
+    font-size: 1em;
+    width: 100%;
+    background: transparent;
+}
+
+.login_form .hasError input {
+    border-color: var(--red);
+}
+
+.login_form [role="alert"].error {
+    color: var(--red);
+    text-align: center;
+    height: 1.3em;
+    line-height: 1.1em;
+    font-size: .8em;
+}
+
+.login_form button {
+    cursor: pointer;
+}
+
+.login_form .form_group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.login_form .form_group:last-child {
+    margin: .5em 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.login_form a {
+    font-size: 0.75em;
+    color: var(--salem);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.login_form a:hover {
+    color: var(--ocean-green);
+}
+

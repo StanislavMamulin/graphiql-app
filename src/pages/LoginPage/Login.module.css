@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 auto;
+    background: #252525;
+}
+
+.lang_btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.nav_home > * {
+    display: block;
+    margin: 0 0 40px 0;
+}
+
+.nav_home > *:hover {
+    color: #159299;
+}
+
+.nav_home .nav_ico {
+    margin: 5px;
+}
