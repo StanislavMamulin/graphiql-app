@@ -2,6 +2,8 @@
 
 **GraphiQL** is a playground/IDE for graphQL requests.
 
+**Demo:** [https://graphiql-ksv-rss.netlify.app/](https://graphiql-ksv-rss.netlify.app/)
+
 <img width="768" alt="GraphiQL" src="https://github.com/StanislavMamulin/graphiql-app/assets/31639106/0b8d250d-3fc9-4759-886a-9ae6930b5e23">
 
 ## Features
